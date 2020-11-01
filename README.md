@@ -25,7 +25,7 @@
                                        └────────────────────────────────┘
 
 
-## Game
+## Play game
 
                                     A     B     C     D     E     F     G     H
                                  ┌─────┬─────┬─────┬─────┬─────┬─────┬─────┬─────┐
@@ -51,7 +51,25 @@
                                Turn: ⬤
 
                                Move: a3 b4
-                                       
+                               
+ ## Author
+                                        
+                                                    __ 
+                                                   (  )
+                                                    ||
+                                                  []||  ,----.___
+                                                  __||_/___      '.
+                                                 / O||    /|       )
+                                                /   ""   / /   =._/
+                                               /________/ /
+                                               |________|/
+
+                                          Name: Brewyn, Espinal
+                                          Email: Brewyn@outlook.com
+
+                                          Back: [ESC]
+                                          
+                                   
  ## How to run it?
 ⬤ Open the terminal: `cd draughts` <br/>
 ⬤ Install dependencies: `npm run install` <br/>
