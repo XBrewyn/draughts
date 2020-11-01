@@ -57,7 +57,7 @@ class Graph {
       }
     });
 
-    // console.clear();
+    console.clear();
     console.log(`\n\n${render}\n\n`);
     console.log(`${fiveSpaces}\tTurn: ${turn === 'white' ? '⬤' : '⬤'.black}\n`);
   }
