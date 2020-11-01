@@ -8,7 +8,7 @@ class Graph {
     let render = '';
 
     options.forEach(({ name, color = 'white' }, index) => {
-      const selecter = (position === index) ? '>' : '';
+      const selecter = (position === index) ? '►' : '';
       const newLine = (index !== (options.length - 1)) ? '\n' : '';
       const column = selecter ? '│ │' : ' │ │';
       const number = `${index + 1}. `;
@@ -27,7 +27,7 @@ class Graph {
     ${render}       
     │ └────────────────────────────┘ │
     ├────────────────────────────────┤
-    │    SELECT: < >     EXIT: ESC   │
+    │    SELECT: ◄ ►     EXIT: ESC   │
     └────────────────────────────────┘
   `);
   }
