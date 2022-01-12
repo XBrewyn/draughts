@@ -9,7 +9,7 @@ class MoveWhiteToken implements MoveStrategy {
 
 class MoveBlackToken implements MoveStrategy {
   public canMove(currentPosition: string, selectPosition: string): boolean {
-    return canMove(currentPosition, selectPosition, (currentRow) => (currentRow + 1));
+    return canMove(currentPosition, selectPosition, (currentRow) => (currentRow - 1));
   }
 };
 

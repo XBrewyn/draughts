@@ -28,7 +28,7 @@ class Graph {
           ? `${ColumnPosition[index + 1]}${numberRow + SPACE.TWO}`
           : SPACE.FOUR;
   
-        const renderPiece: string = `│ ${piece ? ` ${piece.symbol} ` : `${position}`}`;
+        const renderPiece: string = `│ ${piece ? ` ${piece.icon} ` : `${position}`}`;
         const spaces: string = (numberRow > 9) ? SPACE.FOUR : SPACE.FIVE;
         const isFirstColumn: boolean = (index === 0);
 
@@ -50,14 +50,14 @@ class Graph {
 
   static menu(select: number, options: any[]) {
     let render: string = '';
-
-    options.forEach((option: string, index: number) => {
+  
+    options.forEach(({ name }: any = {}, index: number) => {
       const selecter: string = (select === index) ? '►' : '';
       const newLine: string = (index !== (options.length - 1)) ? '\n' : '';
       const column: string = selecter ? '│ │' : ' │ │';
       const number: string = `${index + 1}. `;
 
-      render += `│ │${SPACE.FOUR + selecter + SPACE.TWO + number + option + Tool.space(18 - option.length)}${column + newLine + SPACE.FOUR}`;
+      render += `│ │${SPACE.FOUR + selecter + SPACE.TWO + number + name + Tool.space(18 - name.length)}${column + newLine + SPACE.FOUR}`;
     });
 
     Tool.cleanScreen();
@@ -93,9 +93,18 @@ class Graph {
     Tool.cleanScreen();
     console.log(`${Graph.control()}
 
-      Name: Brewyn, Espinal
-      Email: Brewyn@outlook.com
-      Back: [ESC]
+    Name: Brewyn, Espinal
+    Email: Brewyn@outlook.com
+
+    Back: [ESC]
+    `);
+  }
+
+  static gameOver() {
+    Tool.cleanScreen();
+    console.log(`${Graph.control()}
+
+       GAME OVER
     `);
   }
 }

@@ -1,4 +1,4 @@
-import { Color } from '../Tools/enums';
+import { Color, Icon } from '../Tools/enums';
 import { TypeMove } from '../Tools/types';
 import { MoveKingToken } from './Move';
 
@@ -6,12 +6,12 @@ abstract class Piece {
   private _color: Color;
   private _currentPosition: string;
   private _isKing: boolean;
-  private _symbol : string;
+  private _icon : string;
   protected _typeMove: TypeMove;
 
   constructor(color: Color, position: string) {
     this._color = color;
-    this._symbol = (color === Color.BLACK) ? '⚫' : '⚪';
+    this._icon = Icon[color];
     this._currentPosition = position;
     this._isKing = false;
   }
@@ -20,8 +20,8 @@ abstract class Piece {
     return this._color;
   }
 
-  public get symbol(): string {
-    return this._symbol;
+  public get icon(): string {
+    return this._icon;
   }
 
   public get position(): string {

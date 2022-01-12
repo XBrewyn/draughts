@@ -1,9 +1,11 @@
 import Board from './Board';
+import Menu from './Menu';
 import WhiteToken from './Piece/WhiteToken';
 import BlackToken from './Piece/BlackToken';
 import Tool from './Tools';
-import { Color } from './Tools/enums';
+import { Color, Icon, Option } from './Tools/enums';
 import { TypePiece } from './Tools/types';
+import Graph from './Graph';
 
 class Game {
   private _board: Board = this.buildBoard();
@@ -12,9 +14,34 @@ class Game {
   private _selectPosition: string = '';
 
   constructor() {
-    this._board.display();
+    const options = [
+      {
+        name: Option.START,
+        display: () => this.start()
+      },
+      {
+        name: Option.AUTHOR,
+        display: () => Graph.author()
+      },
+      {
+        name: Option.EXIT,
+        display: (exit: () => {}) => {
+          Graph.gameOver();
+          exit();
+        }
+      },
+    ];
 
-    Tool.input('[piecePos, selectPos]: ', (positions: string) => {
+    const menu = new Menu(options);
+
+    menu.display();
+  }
+
+  private start(): void {
+    this._board.display();
+    this.displayTurn();
+
+    Tool.input('\t[piecePos, selectPos]: ', (positions: string) => {
       const [piecePos, selectPos]: any = positions.split(' ');
 
       this._piece = this._board.searchPiece(piecePos);
@@ -26,6 +53,7 @@ class Game {
 
       this._board.display();
       this.notifyGame();
+      this.displayTurn();
     });
   }
 
@@ -57,22 +85,28 @@ class Game {
     this._colorTurn = (color === Color.BLACK) ? Color.WHITE : Color.BLACK;
   }
 
+  private displayTurn(): void {
+    console.log(`\tTurn: ${Icon[this._colorTurn]}\n`);
+  }
+
   private notifyGame(): void {
-    const { symbol = '', color }: any = this._piece || {};
+    const { icon = '', color }: any = this._piece || {};
     const isValidSelectPos: boolean = this._board.isPosition(this._selectPosition);
     let status: string = '';
 
-    if (!this._piece && !isValidSelectPos) {
-      status = 'Please select two valid positions ⚠️';
+    if (!this._piece || !isValidSelectPos) {
+      status = 'Please select two valid positions 💜';
+
     } else if (this._colorTurn !== color) {
-      status = `${symbol} It\'s not your turn ❌`;
+      status = `${icon} It\'s not your turn ❌`;
+
     } else if (this._piece && isValidSelectPos) {
-      status = `${symbol} moved to ${this._piece.position} ✅`;
+      status = `${icon} moved to ${this._piece.position} ✅`;
 
       this.changeTurn();
     }
 
-    console.log(`\nStatus: ${status}\n`);
+    console.log(`\tStatus: ${status}\n`);
   }
 
   private checkTurn(): boolean {

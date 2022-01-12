@@ -15,7 +15,7 @@ class Tool {
     return [parseInt(ColumnPosition[column]) - num,  parseInt(row) - num];
   }
 
-  static repeat(range: number, str: string) {
+  static repeat(range: number, str: string): string {
     let repeat: string = '';
 
     [...Array(range)].forEach(() => repeat += str);
@@ -27,21 +27,19 @@ class Tool {
     return this.repeat(range, ' ');
   }
 
-  static cleanScreen() {
+  static cleanScreen(): void {
     console.clear();
   }
 
-  keyPress(callback: any) {
+  static keyPress(callback: (key: string, exit: () => void) => void): void {
     readline.emitKeypressEvents(process.stdin);
     process.stdin.setRawMode(true);
     process.stdin.on('keypress', (str, key) => callback(key.name, process.exit));
   }
 
-  static input(question: string, callback: any) {
+  static input(question: string, callback: (res: string) => void): void {
     ((function recursiveAsyncReadLine() {
       rl.question(question, (res: string) => {
-        if (res === 'exit') return rl.close();
-
         callback(res);
         recursiveAsyncReadLine();
       });

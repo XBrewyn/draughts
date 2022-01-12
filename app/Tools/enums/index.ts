@@ -12,11 +12,24 @@ enum ColumnPosition {
 };
 
 enum Color { 
-  BLACK, 
-  WHITE 
+  BLACK = 'BLACK', 
+  WHITE = 'WHITE',
 };
+
+enum Option {
+  START = 'START',
+  AUTHOR = 'AUTHOR',
+  EXIT = 'EXIT',
+}
+
+enum Icon {
+  BLACK = '⚫', 
+  WHITE = '⚪',
+}
 
 export {
   Color,
-  ColumnPosition
+  ColumnPosition,
+  Option,
+  Icon
 };
