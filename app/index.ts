@@ -16,7 +16,7 @@ class Game {
   constructor() {
     const options = [
       {
-        name: Option.START,
+        name: Option.PLAY_GAME,
         display: () => this.start()
       },
       {

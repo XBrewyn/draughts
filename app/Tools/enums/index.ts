@@ -17,7 +17,7 @@ enum Color {
 };
 
 enum Option {
-  START = 'START',
+  PLAY_GAME = 'PLAY GAME',
   AUTHOR = 'AUTHOR',
   EXIT = 'EXIT',
 }
