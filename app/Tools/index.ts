@@ -38,18 +38,14 @@ class Tool {
   }
 
   static input(question: string, callback: any) {
-    const recursiveAsyncReadLine = () => {
+    ((function recursiveAsyncReadLine() {
       rl.question(question, (res: string) => {
-        if (res === 'exit') {
-          return rl.close();
-        }
+        if (res === 'exit') return rl.close();
 
         callback(res);
         recursiveAsyncReadLine();
       });
-    };
-
-    recursiveAsyncReadLine();
+    })());
   }
 }
 

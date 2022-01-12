@@ -7,10 +7,9 @@ import { TypePiece } from './Tools/types';
 
 class Game {
   private _board: Board = this.buildBoard();
+  private _colorTurn: Color = Color.WHITE;
   private _piece: TypePiece | null = null;
   private _selectPosition: string = '';
-  private _colorTurn: Color = Color.WHITE;
-  private _colorLastTurn: Color = this._colorTurn;
 
   constructor() {
     this._board.display();
@@ -48,30 +47,29 @@ class Game {
 
       if (canMove) {
         this._board.update(this._piece, this._selectPosition);
-        this.changeTurn();
       }
     }
   }
 
-  private changeTurn() {
+  private changeTurn(): void {
     const color = this._colorTurn;
 
-    this._colorLastTurn = color;
     this._colorTurn = (color === Color.BLACK) ? Color.WHITE : Color.BLACK;
   }
 
-  private notifyGame() {
+  private notifyGame(): void {
     const { symbol = '', color }: any = this._piece || {};
     const isValidSelectPos: boolean = this._board.isPosition(this._selectPosition);
-    const colorTurn: Color = this._colorLastTurn;
     let status: string = '';
 
     if (!this._piece && !isValidSelectPos) {
       status = 'Please select two valid positions ⚠️';
-    } else if (colorTurn !== color) {
+    } else if (this._colorTurn !== color) {
       status = `${symbol} It\'s not your turn ❌`;
     } else if (this._piece && isValidSelectPos) {
       status = `${symbol} moved to ${this._piece.position} ✅`;
+
+      this.changeTurn();
     }
 
     console.log(`\nStatus: ${status}\n`);

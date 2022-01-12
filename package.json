@@ -1,28 +1,16 @@
 {
-  "name": "draughts",
+  "name": "chess-game",
   "version": "1.0.0",
-  "description": "game of draughts",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && node ./build/app/index.js",
-    "build": "rimraf build/ && babel ./ --out-dir build/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files"
+    "start": "cd app && tsc --outDir dist -t es5 index.ts && node ./dist/index.js"
   },
   "keywords": [],
-  "author": "Brewyn Espinal",
+  "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@babel/cli": "^7.11.6",
-    "@babel/core": "^7.11.6",
-    "colors": "^1.4.0",
-    "rimraf": "^3.0.2"
-  },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.10.4",
-    "@babel/plugin-transform-runtime": "^7.11.5",
-    "@babel/preset-env": "^7.11.5",
-    "eslint": "^7.9.0",
-    "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-config-google": "^0.14.0",
-    "eslint-plugin-import": "^2.22.0"
+    "@types/node": "^17.0.8",
+    "readline-sync": "^1.4.10"
   }
 }

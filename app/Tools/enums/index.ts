@@ -11,7 +11,6 @@ enum ColumnPosition {
   j
 };
 
-
 enum Color { 
   BLACK, 
   WHITE 
