@@ -52,7 +52,7 @@ class Game {
       }
 
       this._board.display();
-      this.notifyGame();
+      this.displayStatus();
       this.displayTurn();
     });
   }
@@ -89,7 +89,7 @@ class Game {
     console.log(`\tTurn: ${Icon[this._colorTurn]}\n`);
   }
 
-  private notifyGame(): void {
+  private displayStatus(): void {
     const { icon = '', color }: any = this._piece || {};
     const isValidSelectPos: boolean = this._board.isPosition(this._selectPosition);
     let status: string = '';
