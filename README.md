@@ -47,8 +47,8 @@
                                  └─────┴─────┴─────┴─────┴─────┴─────┴─────┴─────┘
                                     A     B     C     D     E     F     G     H
 
-                                 Status: ⚪ moved to c5 ✅
-                                 
+                                 Status: ⚪ b4 to a5 ✅
+
                                  Turn: ⬤
 
                                  [piecePos, selectPos]: b4 c5

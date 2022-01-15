@@ -12,6 +12,7 @@ class Game {
   private _colorTurn: Color = Color.WHITE;
   private _piece: TypePiece | null = null;
   private _selectPosition: string = '';
+  private _targetPosition: string = '';
 
   constructor() {
     const options = [
@@ -37,26 +38,6 @@ class Game {
     menu.display();
   }
 
-  private start(): void {
-    this._board.display();
-    this.displayTurn();
-
-    Tool.input('\t[piecePos, selectPos]: ', (positions: string) => {
-      const [piecePos, selectPos]: any = positions.split(' ');
-
-      this._piece = this._board.searchPiece(piecePos);
-      this._selectPosition = selectPos;
-  
-      if (this.checkTurn()) {
-        this.movePiece();
-      }
-
-      this._board.display();
-      this.displayStatus();
-      this.displayTurn();
-    });
-  }
-
   private buildBoard(): Board {
     const boardInstance = Board.getInstance(); 
 
@@ -66,6 +47,30 @@ class Game {
     });
 
     return boardInstance;
+  }
+
+  private start(): void {
+    this.display();
+
+    Tool.input('\t[piecePos, selectPos]: ', (positions: string) => {
+      const [piecePos, selectPos]: any = positions.split(' to ');
+
+      this._piece = this._board.searchPiece(piecePos);
+      this._selectPosition = selectPos;
+      this._targetPosition = piecePos;
+  
+      if (this.checkTurn()) {
+        this.movePiece();
+      }
+
+      this.display();
+    });
+  }
+
+  private checkTurn(): boolean {
+    const { color = '' } = this._piece || {};
+
+    return (color === this._colorTurn) ? true : false;
   }
 
   private movePiece(): void {
@@ -79,14 +84,10 @@ class Game {
     }
   }
 
-  private changeTurn(): void {
-    const color = this._colorTurn;
-
-    this._colorTurn = (color === Color.BLACK) ? Color.WHITE : Color.BLACK;
-  }
-
-  private displayTurn(): void {
-    console.log(`\tTurn: ${Icon[this._colorTurn]}\n`);
+  private display(): void {
+    this._board.display();
+    this.displayStatus();
+    this.displayTurn();
   }
 
   private displayStatus(): void {
@@ -101,7 +102,7 @@ class Game {
       status = `${icon} It\'s not your turn ❌`;
 
     } else if (this._piece && isValidSelectPos) {
-      status = `${icon} moved to ${this._piece.position} ✅`;
+      status = `${icon} ${this._targetPosition} to ${this._selectPosition} ✅`;
 
       this.changeTurn();
     }
@@ -109,16 +110,14 @@ class Game {
     console.log(`\tStatus: ${status}\n`);
   }
 
-  private checkTurn(): boolean {
-    const { color = '' } = this._piece || {};
-    const colorTurn = this._colorTurn;
-    let isTurn: boolean = false;
+  private changeTurn(): void {
+    const color = this._colorTurn;
 
-    if ((color === colorTurn) || (color === colorTurn)) {
-      isTurn = true;
-    }
+    this._colorTurn = (color === Color.BLACK) ? Color.WHITE : Color.BLACK;
+  }
 
-    return isTurn;
+  private displayTurn(): void {
+    console.log(`\tTurn: ${Icon[this._colorTurn]}\n`);
   }
 }
 
