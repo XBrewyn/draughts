@@ -51,7 +51,7 @@
 
                                  Turn: ⬤
 
-                                 [piecePos, selectPos]: b4 c5
+                                 [piecePos, selectPos]: b4 to c5
                                
  ## Author
                                         
