@@ -76,7 +76,7 @@
                                           
                                    
  ## How to run it?
-⬤ Open the terminal: `cd draughts` <br/>
+⬤ Open terminal: `cd draughts` <br/>
 ⬤ Install dependencies: `npm install` <br/>
 ⬤ Run the project: `npm start`
 
