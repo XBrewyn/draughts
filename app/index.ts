@@ -14,27 +14,26 @@ class Game {
   private _piece: Piece | null = null;
   private _selectPosition: string = '';
   private _targetPosition: string = '';
+  private _options: any = [
+    {
+      name: Option.PLAY_GAME,
+      display: () => this.start()
+    },
+    {
+      name: Option.AUTHOR,
+      display: () => Graph.author()
+    },
+    {
+      name: Option.EXIT,
+      display: (exit: () => {}) => {
+        Graph.gameOver();
+        exit();
+      }
+    },
+  ];
 
   constructor() {
-    const options = [
-      {
-        name: Option.PLAY_GAME,
-        display: () => this.start()
-      },
-      {
-        name: Option.AUTHOR,
-        display: () => Graph.author()
-      },
-      {
-        name: Option.EXIT,
-        display: (exit: () => {}) => {
-          Graph.gameOver();
-          exit();
-        }
-      },
-    ];
-
-    const menu = new Menu(options);
+    const menu = new Menu(this._options);
 
     menu.display();
   }
