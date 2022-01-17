@@ -79,7 +79,7 @@
                                    
  ## How to run it?
 ⬤ Open terminal: `cd draughts` <br/>
-⬤ Install dependencies: `npm install` <br/>
+⬤ Install dependencies: `npm i && sudo npm i -g typescript` <br/>
 ⬤ Run the project: `npm start`
 
                                        
