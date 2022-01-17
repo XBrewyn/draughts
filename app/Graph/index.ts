@@ -93,8 +93,10 @@ class Graph {
     Tool.cleanScreen();
     console.log(`${Graph.control()}
 
-    Name: Brewyn, Espinal
+    Name: Brewyn Frederick
+    LastName: Espinal Mercado
     Email: Brewyn@outlook.com
+    Github: XBrewyn
 
     Back: [ESC]
     `);
