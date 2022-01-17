@@ -1,20 +1,20 @@
-import { Icon } from "../Tools/enums";
+import { Icon } from '../Tools/enums';
 
 class Status {
   public static display(state: any = {}) {
-    const { _selectPosition, _board, _colorTurn, _targetPosition, _piece }: any = state;
-    const { icon = '', color = '', position = '' }: any = _piece || {}; 
-    const isValidSelectPos: boolean = _board.isPosition(_selectPosition);
+    const { _selectPosition, _board, _colorTurn, _selectPiece, _piece }: any = state;
+    const { icon = '', color: pieceColor = '' }: any = _piece || {}; 
+    const canMove: boolean = _board.isPosition(_selectPosition);
     let result: string = '';
 
-    if (!position || !isValidSelectPos) {
+    if (!_piece || !canMove) {
       result = 'Please select two valid positions 💜';
 
-    } else if (_colorTurn !== color) {
+    } else if (_colorTurn !== pieceColor) {
       result = `${icon} It\'s not your turn ❌`;
 
-    } else if (position && isValidSelectPos) {
-      result = `${icon} ${_targetPosition} to ${_selectPosition} ✅`;
+    } else if (_piece && canMove) {
+      result = `${icon} ${_selectPiece} to ${_selectPosition} ✅`;
 
       state.changeTurn();
     }

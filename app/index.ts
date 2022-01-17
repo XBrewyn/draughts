@@ -13,8 +13,8 @@ class Game {
   private _colorTurn: Color = Color.WHITE;
   private _piece: Piece | null = null;
   private _selectPosition: string = '';
-  private _targetPosition: string = '';
-  private _options: any = [
+  private _selectPiece: string = '';
+  private _menuOptions: any = [
     {
       name: Option.PLAY_GAME,
       display: () => this.start()
@@ -33,7 +33,7 @@ class Game {
   ];
 
   constructor() {
-    const menu = new Menu(this._options);
+    const menu = new Menu(this._menuOptions);
 
     menu.display();
   }
@@ -57,7 +57,7 @@ class Game {
 
       this._piece = this._board.searchPiece(piecePos);
       this._selectPosition = selectPos;
-      this._targetPosition = piecePos;
+      this._selectPiece = piecePos;
 
       if (this.checkTurn()) {
         this.movePiece();
