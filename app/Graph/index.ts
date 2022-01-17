@@ -89,6 +89,19 @@ class Graph {
     `;
   }
 
+  static notAvailable() {
+    Tool.cleanScreen();
+    console.log(`${Graph.control()}
+        Feature
+    
+          Not
+    
+       Available 😔
+
+    Back: [ESC]
+    `);
+  }
+
   static author() {
     Tool.cleanScreen();
     console.log(`${Graph.control()}

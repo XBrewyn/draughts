@@ -21,15 +21,10 @@ enum Icon {
   WHITE = '⚪'
 }
 
-enum Message {
-  SUCCESS,
-  INVALID_TURN,
-  INVALID_POSITION,
-  INVALID_MOVE
-}
-
 enum Option {
   PLAY_GAME = 'PLAY GAME',
+  ONLINE = 'ONLINE',
+  VS_CPU = 'VS CPU',
   AUTHOR = 'AUTHOR',
   EXIT = 'EXIT'
 }
@@ -38,6 +33,5 @@ export {
   Color,
   ColumnPosition,
   Icon,
-  Message,
-  Option,
+  Option
 }

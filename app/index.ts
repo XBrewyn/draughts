@@ -1,23 +1,32 @@
-import { Color, Option, Message } from './Tools/enums';
+import { Color, Option } from './Tools/enums';
 import BlackToken from './Piece/BlackToken';
 import Board from './Board';
 import Graph from './Graph';
 import Menu from './Menu';
 import Piece from './Piece';
-import Statu from './Status';
+import Status from './Status';
 import Tool from './Tools';
 import WhiteToken from './Piece/WhiteToken';
 
 class Game {
   private _board: Board = this.buildBoard();
+  private _canMove: boolean = false;
   private _colorTurn: Color = Color.WHITE;
   private _piece: Piece | null = null;
-  private _selectPiece: string = '';
-  private _selectPosition: string = '';
+  private _selectPiece: string;
+  private _selectPosition: string;
   private _menuOptions: any = [
     {
       name: Option.PLAY_GAME,
       display: () => this.start()
+    },
+    {
+      name: Option.ONLINE,
+      display: () => Graph.notAvailable()
+    },
+    {
+      name: Option.VS_CPU,
+      display: () => Graph.notAvailable()
     },
     {
       name: Option.AUTHOR,
@@ -50,29 +59,34 @@ class Game {
   }
 
   private start(): void {
-    Tool.input('\t[piecePos, selectPos]: ', (positions: string) => {
-      const [piecePos, selectPos]: any = positions.split(' to ');
+    this.displayGame();
+
+    Tool.input('\t[piecePos, newPos]: ', (positions: string) => {
+      const [piecePos, newPos]: any = positions.split(' to ');
 
       this._piece = this._board.searchPiece(piecePos);
       this._selectPiece = piecePos;
-      this._selectPosition = selectPos;
+      this._selectPosition = newPos;
 
-      if (this.checkTurn()) {
-        this.movePiece();
-      }
+      if (this.checkTurn()) this.movePiece();
+
+      this.displayGame();
     });
   }
 
-  private checkTurn(): boolean {
-    const { color: colorPiece = '' } = this._piece || {};
+  private displayGame(): void {
+    this._board.display();
+    Status.display(this);
+  }
 
-    return (colorPiece === this._colorTurn) ? true : false;
+  private checkTurn(): boolean {
+    return ((this._piece && this._piece.color) === this._colorTurn) ? true : false;
   }
 
   private movePiece(): void {
-    const canMove: boolean = this._piece.canMove(this._board, this._selectPosition);
+    this._canMove = this._piece.canMove(this._board, this._selectPosition);
 
-    if (canMove) {
+    if (this._canMove) {
       this._board.update(this._piece, this._selectPosition);
       this.changeTurn();
     }

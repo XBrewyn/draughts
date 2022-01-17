@@ -51,12 +51,9 @@ abstract class Piece {
     return this._typeEat.canEat(board, this._currentPosition, selectPosition);
   }
 
-  public changeMoveBehavior(typeMove: MoveKingPiece) {
+  public changePieceBehavior(typeMove: MoveKingPiece, typeEat: EatKingPiece) {
     this._typeMove = typeMove;
-  }
-
-  public changeEatBehavior(_typeEat: EatKingPiece) {
-    this._typeEat = _typeEat;
+    this._typeEat = typeEat;
   }
 }
 
