@@ -12,19 +12,15 @@ class Tool {
   static formatPosition(position: string, num: number = 0): number[] {
     const [column, row]: any = position;
 
-    return [parseInt(ColumnPosition[column]) - num,  parseInt(row) - num];
+    return [(parseInt(ColumnPosition[column]) - num), (parseInt(row) - num)];
   }
 
-  static repeat(range: number, str: string): string {
-    let repeat: string = '';
-
-    [...Array(range)].forEach(() => repeat += str);
-
-    return repeat;
+  static space(number: number): string {
+    return ' '.repeat(number);
   }
 
-  static space(range: number): string {
-    return this.repeat(range, ' ');
+  static range(number: number): number[] {
+    return [...Array(number).keys()];
   }
 
   static cleanScreen(): void {
@@ -34,7 +30,7 @@ class Tool {
   static keyPress(callback: (key: string, exit: () => void) => void): void {
     readline.emitKeypressEvents(process.stdin);
     process.stdin.setRawMode(true);
-    process.stdin.on('keypress', (str, key) => callback(key.name, process.exit));
+    process.stdin.on('keypress', (_, key) => callback(key.name, process.exit));
   }
 
   static input(question: string, callback: (res: string) => void): void {
@@ -42,8 +38,8 @@ class Tool {
       rl.question(question, (res: string) => {
         callback(res);
         recursiveAsyncReadLine();
-      });
-    })());
+      })
+    })())
   }
 }
 

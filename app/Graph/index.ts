@@ -1,4 +1,4 @@
-import Piece from '../Piece/Piece';
+import Piece from '../Piece';
 import Tool from '../Tools';
 import Board from '../Board';
 import { ColumnPosition } from '../Tools/enums';
@@ -15,7 +15,7 @@ class Graph {
   static board(boardInstance: Board) {
     const board = boardInstance.get();
     const LENGTH = board.length;
-    const repeat = (str: string) => Tool.repeat(LENGTH - 1, str);
+    const repeat = (str: string) => str.repeat(LENGTH - 1);
     const ABC = 'ABCDEFGHIJ'.replace(/\w/g, (letter) => letter + SPACE.FIVE);
     const lines = `├${repeat('─────┼')}─────┤\n`;
     let render: string = `${SPACE.TEN}${ABC}\n${SPACE.SEVEN}┌${repeat('─────┬')}─────┐\n`;

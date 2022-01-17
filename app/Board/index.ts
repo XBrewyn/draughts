@@ -1,13 +1,11 @@
-import { Color, ColumnPosition } from '../Tools/enums';
-import WhiteToken from '../Piece/WhiteToken';
-import BlackToken from '../Piece/BlackToken';
-import Tool from '../Tools';
-import { TypePiece } from '../Tools/types';
+import Piece from '../Piece';
 import Graph from '../Graph';
+import Tool from '../Tools';
+import { ColumnPosition } from '../Tools/enums';
 
 class Board {
-  private static _instance: Board;
   private _board: any[];
+  private static _instance: Board;
  
   private constructor() {
     this._board = this.buildBoard();
@@ -30,18 +28,10 @@ class Board {
   }
 
   public isSquareBlack(row: number, column: number): boolean {
-    return this.getSquareColor(row, column) === Color.BLACK;
+    return (row % 2) === ((column % 2 === 1) ? 0 : 1) ? true : false;
   }
 
-  public isSquareWhite(row: number, column: number): boolean {
-    return this.getSquareColor(row, column) === Color.WHITE;
-  }
-
-  public getSquareColor(row: number, column: number): Color {
-    return row % 2 === ((column % 2 === 0) ? 1 : 0) ? Color.WHITE : Color.BLACK;
-  }
-
-  public update(piece: TypePiece, selectPosition: string) {
+  public update(piece: Piece, selectPosition: string) {
     const [piecePosColumn, piecePosRow] = Tool.formatPosition(piece.position, 1);
     const [newPosColumn, newPosRow] = Tool.formatPosition(selectPosition, 1);
     
@@ -51,8 +41,8 @@ class Board {
     piece.position = selectPosition;
   }
 
-  public searchPiece(searchPosition: string): TypePiece | null {
-    let piece: TypePiece | null = null;
+  public searchPiece(searchPosition: string): Piece | null {
+    let piece: Piece | null = null;
 
     if (this.isPosition(searchPosition)) {
       const [column, row]: number[] = Tool.formatPosition(searchPosition, 1);
@@ -75,7 +65,7 @@ class Board {
   public addPiece({ white, black }: any = {}): void {
     this._board = this._board.map((rows: any[], indexRow: number) =>
       rows.map((__, indexColumn: number) => {
-        let piece: WhiteToken | BlackToken | null = null;
+        let piece: Piece | null = null;
         const isSquareBlack: boolean = this.isSquareBlack(indexRow, indexColumn);
         const position: string = ColumnPosition[indexColumn + 1] + (indexRow + 1);
 

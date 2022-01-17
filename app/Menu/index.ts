@@ -1,5 +1,5 @@
-import Graph from "../Graph";
-import Tool from "../Tools";
+import Graph from '../Graph';
+import Tool from '../Tools';
 
 class Menu {
   private _index: number = 0;
@@ -22,11 +22,11 @@ class Menu {
     Tool.keyPress((key: string, exit: any) => {
       switch(key) {
         case 'right':
-          this._index = (this._index >= this._lenOption) ? 0 : ++this._index;
+          this._index = (this._index >= this._lenOption) ? 0 : this._index + 1;
           break;
 
         case 'left':
-          this._index = (this._index <= 0) ? this._lenOption : --this._index;
+          this._index = (this._index <= 0) ? this._lenOption : this._index - 1;
           break;
 
         case 'return':

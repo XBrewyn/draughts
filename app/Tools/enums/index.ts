@@ -9,22 +9,22 @@ enum ColumnPosition {
   h, 
   i, 
   j
-};
+}
 
 enum Color { 
   BLACK = 'BLACK', 
-  WHITE = 'WHITE',
-};
+  WHITE = 'WHITE'
+}
 
 enum Option {
   PLAY_GAME = 'PLAY GAME',
   AUTHOR = 'AUTHOR',
-  EXIT = 'EXIT',
+  EXIT = 'EXIT'
 }
 
 enum Icon {
   BLACK = '⚫', 
-  WHITE = '⚪',
+  WHITE = '⚪'
 }
 
 export {
@@ -32,4 +32,4 @@ export {
   ColumnPosition,
   Option,
   Icon
-};
+}

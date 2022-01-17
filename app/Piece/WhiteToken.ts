@@ -1,4 +1,4 @@
-import Piece from './Piece';
+import Piece from '.';
 import { Color } from '../Tools/enums';
 import { MoveWhiteToken } from './Move';
 
