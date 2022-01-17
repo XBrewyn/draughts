@@ -1,6 +1,8 @@
-import { MoveStrategy } from '../interfaces';
+import Board from '../Board';
+import { EatStrategy, MoveStrategy } from '../interfaces';
 import { Color, Icon } from '../Tools/enums';
-import { MoveKingToken } from './Move';
+import { EatKingPiece } from './Eat';
+import { MoveKingPiece } from './Move';
 
 abstract class Piece {
   private _color: Color;
@@ -8,6 +10,7 @@ abstract class Piece {
   private _isKing: boolean;
   private _icon : string;
   protected _typeMove: MoveStrategy;
+  protected _typeEat: EatStrategy;
 
   constructor(color: Color, position: string) {
     this._color = color;
@@ -40,12 +43,20 @@ abstract class Piece {
     this._currentPosition = value;
   }
 
-  public canMove(selectPosition: string): boolean {
-    return this._typeMove.canMove(this._currentPosition, selectPosition);
+  public canMove(board: Board, selectPosition: string): boolean {
+    return this._typeMove.canMove(board, this._currentPosition, selectPosition);
   }
 
-  public changeMoveBehavior(typeMove: MoveKingToken) {
+  public canEat(board: Board, selectPosition: string): boolean {
+    return this._typeEat.canEat(board, this._currentPosition, selectPosition);
+  }
+
+  public changeMoveBehavior(typeMove: MoveKingPiece) {
     this._typeMove = typeMove;
+  }
+
+  public changeEatBehavior(_typeEat: EatKingPiece) {
+    this._typeEat = _typeEat;
   }
 }
 

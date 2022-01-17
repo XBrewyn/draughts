@@ -1,26 +1,33 @@
-import { Icon } from '../Tools/enums';
+import { Icon, Message } from '../Tools/enums';
 
 class Status {
-  public static display(state: any = {}) {
-    const { _selectPosition, _board, _colorTurn, _selectPiece, _piece }: any = state;
-    const { icon = '', color: pieceColor = '' }: any = _piece || {}; 
-    const canMove: boolean = _board.isPosition(_selectPosition);
-    let result: string = '';
+  public static display(state: any, message: Message) {
+    let result: string;
 
-    if (!_piece || !canMove) {
-      result = 'Please select two valid positions 💜';
+    switch (message) {
+      case Message.SUCCESS:
+        result = `${state.icon} ${state._selectPiece} to ${state._selectPosition} ✅`;
+        break;
+  
+      case Message.INVALID_POSITION:
+        result = 'Please select two valid positions 💜';
+        break;
 
-    } else if (_colorTurn !== pieceColor) {
-      result = `${icon} It\'s not your turn ❌`;
+      case Message.INVALID_TURN:
+        result = `${state.icon} It\'s not your turn ❌`;
+        break;
 
-    } else if (_piece && canMove) {
-      result = `${icon} ${_selectPiece} to ${_selectPosition} ✅`;
+      case Message.INVALID_MOVE:
+        result = 'invalid move ❌';
+        break;
 
-      state.changeTurn();
+      default:
+        result = '';
+        break;
     }
 
     console.log(`
-    \tTurn: ${Icon[_colorTurn]}\n
+    \tTurn: ${Icon[state._colorTurn]}\n
     \tStatus: ${result}\n
     `);
   }

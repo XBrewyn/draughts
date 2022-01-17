@@ -1,19 +1,19 @@
-import Board from './Board';
-import Menu from './Menu';
-import WhiteToken from './Piece/WhiteToken';
+import { Color, Option, Message } from './Tools/enums';
 import BlackToken from './Piece/BlackToken';
-import Tool from './Tools';
-import { Color, Option } from './Tools/enums';
+import Board from './Board';
 import Graph from './Graph';
+import Menu from './Menu';
 import Piece from './Piece';
-import Status from './Status';
+import Statu from './Status';
+import Tool from './Tools';
+import WhiteToken from './Piece/WhiteToken';
 
 class Game {
   private _board: Board = this.buildBoard();
   private _colorTurn: Color = Color.WHITE;
   private _piece: Piece | null = null;
-  private _selectPosition: string = '';
   private _selectPiece: string = '';
+  private _selectPosition: string = '';
   private _menuOptions: any = [
     {
       name: Option.PLAY_GAME,
@@ -50,49 +50,36 @@ class Game {
   }
 
   private start(): void {
-    this.display();
-
     Tool.input('\t[piecePos, selectPos]: ', (positions: string) => {
       const [piecePos, selectPos]: any = positions.split(' to ');
 
       this._piece = this._board.searchPiece(piecePos);
-      this._selectPosition = selectPos;
       this._selectPiece = piecePos;
+      this._selectPosition = selectPos;
 
       if (this.checkTurn()) {
         this.movePiece();
       }
-
-      this.display();
     });
   }
 
   private checkTurn(): boolean {
-    const { color = '' } = this._piece || {};
+    const { color: colorPiece = '' } = this._piece || {};
 
-    return (color === this._colorTurn) ? true : false;
+    return (colorPiece === this._colorTurn) ? true : false;
   }
 
   private movePiece(): void {
-    if (this._board.isPosition(this._selectPosition)) {
-      const isEmptySquare: boolean = this._board.searchPiece(this._selectPosition) === null;
-      const canMove: boolean = isEmptySquare && this._piece.canMove(this._selectPosition);
+    const canMove: boolean = this._piece.canMove(this._board, this._selectPosition);
 
-      if (canMove) {
-        this._board.update(this._piece, this._selectPosition);
-      }
+    if (canMove) {
+      this._board.update(this._piece, this._selectPosition);
+      this.changeTurn();
     }
   }
 
-  private display(): void {
-    this._board.display();
-    Status.display(this);
-  }
-
   private changeTurn(): void {
-    const color = this._colorTurn;
-
-    this._colorTurn = (color === Color.BLACK) ? Color.WHITE : Color.BLACK;
+    this._colorTurn = (this._colorTurn === Color.BLACK) ? Color.WHITE : Color.BLACK;
   }
 }
 

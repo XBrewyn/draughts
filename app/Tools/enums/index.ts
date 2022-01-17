@@ -1,3 +1,8 @@
+enum Color { 
+  BLACK = 'BLACK', 
+  WHITE = 'WHITE'
+}
+
 enum ColumnPosition { 
   a = 1, 
   b, 
@@ -11,9 +16,16 @@ enum ColumnPosition {
   j
 }
 
-enum Color { 
-  BLACK = 'BLACK', 
-  WHITE = 'WHITE'
+enum Icon {
+  BLACK = '⚫', 
+  WHITE = '⚪'
+}
+
+enum Message {
+  SUCCESS,
+  INVALID_TURN,
+  INVALID_POSITION,
+  INVALID_MOVE
 }
 
 enum Option {
@@ -22,14 +34,10 @@ enum Option {
   EXIT = 'EXIT'
 }
 
-enum Icon {
-  BLACK = '⚫', 
-  WHITE = '⚪'
-}
-
 export {
   Color,
   ColumnPosition,
+  Icon,
+  Message,
   Option,
-  Icon
 }
