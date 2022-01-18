@@ -7,7 +7,7 @@ import { MoveKingPiece } from './Move';
 abstract class Piece {
   private _color: Color;
   private _currentPosition: string;
-  private _isKing: boolean;
+  private _isKing: boolean = false;
   private _icon : string;
   protected _typeMove: MoveStrategy;
   protected _typeEat: EatStrategy;
@@ -16,7 +16,6 @@ abstract class Piece {
     this._color = color;
     this._icon = Icon[color];
     this._currentPosition = position;
-    this._isKing = false;
   }
 
   public get color(): Color {

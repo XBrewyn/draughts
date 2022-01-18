@@ -1,12 +1,12 @@
 import { Color, Option } from './Tools/enums';
-import BlackToken from './Piece/BlackToken';
+import BlackPiece from './Piece/BlackPiece';
 import Board from './Board';
 import Graph from './Graph';
 import Menu from './Menu';
 import Piece from './Piece';
 import Status from './Status';
 import Tool from './Tools';
-import WhiteToken from './Piece/WhiteToken';
+import WhitePiece from './Piece/WhitePiece';
 
 class Game {
   private _board: Board = this.buildBoard();
@@ -51,8 +51,8 @@ class Game {
     const boardInstance = Board.getInstance(); 
 
     boardInstance.addPiece({
-      white: WhiteToken,
-      black: BlackToken
+      white: WhitePiece,
+      black: BlackPiece
     });
 
     return boardInstance;

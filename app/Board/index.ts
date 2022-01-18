@@ -34,7 +34,7 @@ class Board {
   public update(piece: Piece, selectPosition: string) {
     const [piecePosColumn, piecePosRow] = Tool.formatPosition(piece.position, 1);
     const [newPosColumn, newPosRow] = Tool.formatPosition(selectPosition, 1);
-    
+
     this._board[piecePosRow][piecePosColumn] = null;
     this._board[newPosRow][newPosColumn] = piece;
 
