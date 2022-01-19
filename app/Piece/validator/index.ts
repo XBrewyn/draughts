@@ -16,7 +16,7 @@ const canMove = (
   const isValidRow: boolean = ((piecePos.row + step) === selectPos.row);
   const isValidColumn: boolean = (
     (piecePos.column + step) === selectPos.column ||
-    (piecePos.column - step) === selectPos.row
+    (piecePos.column - step) === selectPos.column
   );
 
   return (isValidColumn && isValidRow) && isEmptySelectPosition;
