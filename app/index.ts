@@ -9,8 +9,8 @@ import Tool from './Tools';
 import WhitePiece from './Piece/WhitePiece';
 
 class Game {
-  private _canEat: string = '';
   private _board: Board = this.buildBoard();
+  private _canEat: boolean = false;
   private _canMove: boolean = false;
   private _colorTurn: Color = Color.WHITE;
   private _piece: Piece | null = null;
