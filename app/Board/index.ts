@@ -2,6 +2,7 @@ import Piece from '../Piece';
 import Graph from '../Graph';
 import Tool from '../Tools';
 import { ColumnPosition } from '../Tools/enums';
+import { Position } from '../interfaces';
 
 class Board {
   private _board: any[];
@@ -17,9 +18,9 @@ class Board {
     return Board._instance;
   }
 
-  private buildBoard(): object[] {
-    const arrays: object[] = [[], [], [], [], [], [], [], [], [], []];
-
+  private buildBoard(): number[][] {
+    const arrays: number[] = Tool.range(10);
+    
     return arrays.map(() => arrays);
   }
 
@@ -31,12 +32,26 @@ class Board {
     return (row % 2) === ((column % 2 === 1) ? 0 : 1) ? true : false;
   }
 
-  public update(piece: Piece, selectPosition: string) {
-    const [piecePosColumn, piecePosRow] = Tool.formatPosition(piece.position, 1);
-    const [newPosColumn, newPosRow] = Tool.formatPosition(selectPosition, 1);
-    
-    this._board[piecePosRow][piecePosColumn] = null;
-    this._board[newPosRow][newPosColumn] = piece;
+  public remove(position: string): Piece {
+    let piece: Piece | null = null;
+
+    if (this.isPosition(position)) {
+      const { row, column }: Position = Tool.formatPosition(position, 1);
+
+      piece = this._board[row][column];
+
+      this._board[row][column] = null;
+    }
+
+    return piece;
+  }
+
+  public update(piece: Piece, selectPosition: string): void {
+    const piecePos: Position = Tool.formatPosition(piece.position, 1);
+    const selectPos: Position = Tool.formatPosition(selectPosition, 1);
+
+    this._board[piecePos.row][piecePos.column] = null;
+    this._board[selectPos.row][selectPos.column] = piece;
 
     piece.position = selectPosition;
   }
@@ -45,7 +60,7 @@ class Board {
     let piece: Piece | null = null;
 
     if (this.isPosition(searchPosition)) {
-      const [column, row]: number[] = Tool.formatPosition(searchPosition, 1);
+      const { row, column }: Position = Tool.formatPosition(searchPosition, 1);
 
       piece = this._board[row][column];
     }

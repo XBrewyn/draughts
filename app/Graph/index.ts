@@ -44,7 +44,7 @@ class Graph {
 
     render += `${SPACE.SEVEN}└${repeat('─────┴')}─────┘\n${SPACE.TEN + ABC}`;
   
-    Tool.cleanScreen();
+    // Tool.cleanScreen();
     console.log(`\n\n${render}\n\n`);
   }
 
@@ -87,6 +87,19 @@ class Graph {
       /________/ /
       |________|/
     `;
+  }
+
+  static notAvailable() {
+    Tool.cleanScreen();
+    console.log(`${Graph.control()}
+        Feature
+    
+          Not
+    
+       Available 😔
+
+    Back: [ESC]
+    `);
   }
 
   static author() {

@@ -1,23 +1,33 @@
-import Board from './Board';
-import Menu from './Menu';
-import WhiteToken from './Piece/WhiteToken';
-import BlackToken from './Piece/BlackToken';
-import Tool from './Tools';
 import { Color, Option } from './Tools/enums';
+import BlackPiece from './Piece/BlackPiece';
+import Board from './Board';
 import Graph from './Graph';
+import Menu from './Menu';
 import Piece from './Piece';
 import Status from './Status';
+import Tool from './Tools';
+import WhitePiece from './Piece/WhitePiece';
 
 class Game {
+  private _canEat: string = '';
   private _board: Board = this.buildBoard();
+  private _canMove: boolean = false;
   private _colorTurn: Color = Color.WHITE;
   private _piece: Piece | null = null;
-  private _selectPosition: string = '';
-  private _selectPiece: string = '';
+  private _selectPiecePos: string;
+  private _selectPosition: string;
   private _menuOptions: any = [
     {
       name: Option.PLAY_GAME,
       display: () => this.start()
+    },
+    {
+      name: Option.ONLINE,
+      display: () => Graph.notAvailable()
+    },
+    {
+      name: Option.VS_CPU,
+      display: () => Graph.notAvailable()
     },
     {
       name: Option.AUTHOR,
@@ -42,57 +52,56 @@ class Game {
     const boardInstance = Board.getInstance(); 
 
     boardInstance.addPiece({
-      white: WhiteToken,
-      black: BlackToken
+      white: WhitePiece,
+      black: BlackPiece
     });
 
     return boardInstance;
   }
 
   private start(): void {
-    this.display();
+    this.displayGame();
 
-    Tool.input('\t[piecePos, selectPos]: ', (positions: string) => {
-      const [piecePos, selectPos]: any = positions.split(' to ');
+    Tool.input('\t[piecePos, newPos]: ', (positions: string) => {
+      const [piecePos, newPos]: any = positions.split(' to ');
 
       this._piece = this._board.searchPiece(piecePos);
-      this._selectPosition = selectPos;
-      this._selectPiece = piecePos;
+      this._selectPiecePos = piecePos;
+      this._selectPosition = newPos;
 
-      if (this.checkTurn()) {
-        this.movePiece();
-      }
+      if (this.checkTurn()) this.movePiece();
 
-      this.display();
+      this.displayGame();
     });
   }
 
-  private checkTurn(): boolean {
-    const { color = '' } = this._piece || {};
-
-    return (color === this._colorTurn) ? true : false;
-  }
-
-  private movePiece(): void {
-    if (this._board.isPosition(this._selectPosition)) {
-      const isEmptySquare: boolean = this._board.searchPiece(this._selectPosition) === null;
-      const canMove: boolean = isEmptySquare && this._piece.canMove(this._selectPosition);
-
-      if (canMove) {
-        this._board.update(this._piece, this._selectPosition);
-      }
-    }
-  }
-
-  private display(): void {
+  private displayGame(): void {
     this._board.display();
     Status.display(this);
   }
 
-  private changeTurn(): void {
-    const color = this._colorTurn;
+  private checkTurn(): boolean {
+    const { _piece: { color = '' } = {}, _colorTurn }: any = this;
 
-    this._colorTurn = (color === Color.BLACK) ? Color.WHITE : Color.BLACK;
+    return (color === _colorTurn) ? true : false;
+  }
+
+  private movePiece(): void {
+    this._canMove = this._piece.canMove(this._board, this._selectPosition);
+    this._canEat = this._piece.canEat(this._board, this._selectPosition);
+
+    if (this._canMove) {
+      this._board.update(this._piece, this._selectPosition);
+      this.changeTurn();
+
+    } else if (this._canEat) {
+      this._board.remove(this._piece.enemyPos);
+      this._board.update(this._piece, this._selectPosition);
+    }
+  }
+
+  private changeTurn(): void {
+    this._colorTurn = (this._colorTurn === Color.BLACK) ? Color.WHITE : Color.BLACK;
   }
 }
 

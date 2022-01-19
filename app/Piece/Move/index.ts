@@ -1,26 +1,29 @@
+import Board from '../../Board';
 import { MoveStrategy } from '../../interfaces';
 import { canMove } from '../validator';
 
-class MoveWhiteToken implements MoveStrategy {
-  public canMove(currentPosition: string, selectPosition: string): boolean {
-    return canMove(currentPosition, selectPosition, 1);
-  };
-};
+const STEP = 1;
 
-class MoveBlackToken implements MoveStrategy {
-  public canMove(currentPosition: string, selectPosition: string): boolean {
-    return canMove(currentPosition, selectPosition, -1);
-  };
-};
+class MoveWhitePiece implements MoveStrategy {
+  public canMove(board: Board, currentPosition: string, selectPosition: string): boolean {
+    return canMove(board, currentPosition, selectPosition, STEP);
+  }
+}
 
-class MoveKingToken implements MoveStrategy {
-  public canMove(currentPosition: string, selectPosition: string): boolean {
+class MoveBlackPiece implements MoveStrategy {
+  public canMove(board: Board, currentPosition: string, selectPosition: string): boolean {
+    return canMove(board, currentPosition, selectPosition, -STEP);
+  }
+}
+
+class MoveKingPiece implements MoveStrategy {
+  public canMove(board: Board, currentPosition: string, selectPosition: string): boolean {
     return false;
   };
 };
 
 export {
-  MoveWhiteToken,
-  MoveBlackToken,
-  MoveKingToken
+  MoveWhitePiece,
+  MoveBlackPiece,
+  MoveKingPiece
 };

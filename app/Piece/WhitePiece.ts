@@ -1,12 +1,14 @@
 import Piece from '.';
 import { Color } from '../Tools/enums';
-import { MoveWhiteToken } from './Move';
+import { EatWhitePiece } from './Eat';
+import { MoveWhitePiece } from './Move';
 
 class WhiteToken extends Piece {
   constructor(position: string) {
     super(Color.WHITE, position);
 
-    this._typeMove = new MoveWhiteToken();
+    this._typeEat = new EatWhitePiece();
+    this._typeMove = new MoveWhitePiece();
   }
 }
 

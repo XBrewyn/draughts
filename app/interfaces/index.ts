@@ -1,12 +1,27 @@
+import Board from '../Board';
+
 interface MoveStrategy {
-  canMove(currentPosition: string, selectPosition: string): boolean;
+  canMove(board: Board, currentPosition: string, selectPosition: string): boolean;
 };
 
 interface EatStrategy {
-  canMove(currentPosition: string, selectPosition: string): boolean;
+  enemyPos: string;
+  canEat(board: Board, currentPosition: string, selectPosition: string): boolean;
 };
+
+interface Position {
+  row: number;
+  column: number;
+};
+
+interface EatPiece {
+  canEat: boolean;
+  enemyPos: string;
+}
 
 export {
   MoveStrategy,
-  EatStrategy
+  EatStrategy,
+  Position,
+  EatPiece
 };
