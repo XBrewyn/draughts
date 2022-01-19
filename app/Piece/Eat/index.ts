@@ -21,7 +21,7 @@ class EatBlackPiece implements EatStrategy {
   enemyPos: any;
 
   public canEat(board: Board, currentPosition: string, selectPosition: string) {
-    const { canEat, enemyPos } = eatPiece(board, currentPosition, selectPosition, Color.BLACK, STEP_MOVE);
+    const { canEat, enemyPos } = eatPiece(board, currentPosition, selectPosition, Color.WHITE, -STEP_MOVE);
 
     this.enemyPos = enemyPos;
 

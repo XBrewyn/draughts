@@ -46,7 +46,7 @@ abstract class Piece {
     return this._typeMove.canMove(board, this._currentPosition, selectPosition);
   }
 
-  public canEat(board: Board, selectPosition: string): any {
+  public canEat(board: Board, selectPosition: string): boolean {
     return this._typeEat.canEat(board, this._currentPosition, selectPosition);
   }
 

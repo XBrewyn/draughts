@@ -30,7 +30,6 @@ const getEnemyPos = (
   const piecePos: Position = Tool.formatPosition(currentPosition);
   const selectPos: Position = Tool.formatPosition(selectPosition);
   const stepEat = (color === Color.WHITE) ? -1 : 1;
-
   let enemyPosColumn: number = (selectPos.column + 1);
   let enemyPosRow: number = (selectPos.row - stepEat);
 

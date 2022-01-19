@@ -81,9 +81,9 @@ class Game {
   }
 
   private checkTurn(): boolean {
-    const { _piece: { color = '' } = {}, _colorTurn }: any = this;
+    const { color = '' }: any = this._piece || {};
 
-    return (color === _colorTurn) ? true : false;
+    return (color === this._colorTurn) ? true : false;
   }
 
   private movePiece(): void {
