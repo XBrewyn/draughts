@@ -5,10 +5,23 @@ interface MoveStrategy {
 };
 
 interface EatStrategy {
+  enemyPos: string;
   canEat(board: Board, currentPosition: string, selectPosition: string): boolean;
 };
 
+interface Position {
+  row: number;
+  column: number;
+};
+
+interface EatPiece {
+  canEat: boolean;
+  enemyPos: string;
+}
+
 export {
   MoveStrategy,
-  EatStrategy
+  EatStrategy,
+  Position,
+  EatPiece
 };

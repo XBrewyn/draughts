@@ -1,20 +1,37 @@
 import Board from '../../Board';
-import { EatStrategy } from '../../interfaces';
-import { canMove } from '../validator';
+import { EatPiece, EatStrategy } from '../../interfaces';
+import { Color } from '../../Tools/enums';
+import { eatPiece } from '../validator';
+
+const STEP_MOVE = 2;
 
 class EatWhitePiece implements EatStrategy {
-  public canEat(board: Board, currentPosition: string, selectPosition: string): boolean {
-    return canMove(board, currentPosition, selectPosition, 2) && false;
+  enemyPos: any;
+
+  public canEat(board: Board, currentPosition: string, selectPosition: string) {
+    const { canEat, enemyPos }: EatPiece = eatPiece(board, currentPosition, selectPosition, Color.BLACK, STEP_MOVE);
+
+    this.enemyPos = enemyPos;
+
+    return canEat;
   }
 }
 
 class EatBlackPiece implements EatStrategy {
-  public canEat(board: Board, currentPosition: string, selectPosition: string): boolean {
-    return canMove(board, currentPosition, selectPosition, -2) && false;
+  enemyPos: any;
+
+  public canEat(board: Board, currentPosition: string, selectPosition: string) {
+    const { canEat, enemyPos } = eatPiece(board, currentPosition, selectPosition, Color.BLACK, STEP_MOVE);
+
+    this.enemyPos = enemyPos;
+
+    return canEat;
   }
 }
 
 class EatKingPiece implements EatStrategy {
+  enemyPos: string;
+
   public canEat(board: Board, currentPosition: string, selectPosition: string): boolean {
     return false;
   }

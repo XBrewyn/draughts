@@ -9,11 +9,12 @@ import Tool from './Tools';
 import WhitePiece from './Piece/WhitePiece';
 
 class Game {
+  private _canEat: string = '';
   private _board: Board = this.buildBoard();
   private _canMove: boolean = false;
   private _colorTurn: Color = Color.WHITE;
   private _piece: Piece | null = null;
-  private _selectPiece: string;
+  private _selectPiecePos: string;
   private _selectPosition: string;
   private _menuOptions: any = [
     {
@@ -65,7 +66,7 @@ class Game {
       const [piecePos, newPos]: any = positions.split(' to ');
 
       this._piece = this._board.searchPiece(piecePos);
-      this._selectPiece = piecePos;
+      this._selectPiecePos = piecePos;
       this._selectPosition = newPos;
 
       if (this.checkTurn()) this.movePiece();
@@ -80,15 +81,22 @@ class Game {
   }
 
   private checkTurn(): boolean {
-    return ((this._piece && this._piece.color) === this._colorTurn) ? true : false;
+    const { _piece: { color = '' } = {}, _colorTurn }: any = this;
+
+    return (color === _colorTurn) ? true : false;
   }
 
   private movePiece(): void {
     this._canMove = this._piece.canMove(this._board, this._selectPosition);
+    this._canEat = this._piece.canEat(this._board, this._selectPosition);
 
     if (this._canMove) {
       this._board.update(this._piece, this._selectPosition);
       this.changeTurn();
+
+    } else if (this._canEat) {
+      this._board.remove(this._piece.enemyPos);
+      this._board.update(this._piece, this._selectPosition);
     }
   }
 

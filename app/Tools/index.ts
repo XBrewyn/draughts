@@ -9,10 +9,13 @@ const rl = readline.createInterface({
 class Tool {
   private constructor() {}
 
-  static formatPosition(position: string, num: number = 0): number[] {
+  static formatPosition(position: string, num: number = 0): any {
     const [column, row]: any = position;
 
-    return [(parseInt(ColumnPosition[column]) - num), (parseInt(row) - num)];
+    return { 
+      column: (parseInt(ColumnPosition[column]) - num),
+      row: (parseInt(row) - num)
+    }
   }
 
   static space(number: number): string {
