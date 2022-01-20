@@ -1,13 +1,18 @@
 # Draughts
 
-> Draughts is played by two opponents, on opposite sides of the gameboard. One player has the dark pieces; the other has the light pieces. 
-> Players alternate turns. A player may not move an opponent's piece. A move consists of moving a piece diagonally to an adjacent unoccupied square. 
-> If the adjacent square contains an opponent's piece, and the square immediately beyond it is vacant, the piece may be captured (and removed from the game) by jumping over it.
-
-> Only the dark squares of the checkered board are used. A piece may move only diagonally into an unoccupied square. When presented, capturing is mandatory in most official rules, although some rule variations make capturing optional.[3] In almost all variants, the player without pieces remaining, or who cannot move due to being blocked, loses the game.
+Draughts is played by two opponents, on opposite sides of the gameboard. One player has the dark pieces; the other has the light pieces. 
+Players alternate turns. A player may not move an opponent's piece. A move consists of moving a piece diagonally to an adjacent unoccupied square. 
+If the adjacent square contains an opponent's piece, and the square immediately beyond it is vacant, the piece may be captured (and removed from the game) by jumping over it.
 
  ![Node version](https://img.shields.io/badge/Node%20version->=v17.3.1-green)
  ![npm package version](https://img.shields.io/badge/npm%20package->=v8.3.0-green)
+
+## Diagram
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/42366713/150288990-b9be92d6-d276-4af0-9458-1e9884f8ca40.jpeg" alt="drawing" style="width:800px;"/>
+</p>
+
 
 ## Menu
 
