@@ -86,7 +86,7 @@ If the adjacent square contains an opponent's piece, and the square immediately 
                                    
  ## How to run it?
 ⬤ Open terminal: `cd draughts` <br/>
-⬤ Install dependencies: `npm i && sudo npm i -g typescript` <br/>
+⬤ Install dependencies: `npm i && npm i -g typescript` <br/>
 ⬤ Run the project: `npm start`
 
                                        
