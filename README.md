@@ -8,7 +8,7 @@ If the adjacent square contains an opponent's piece, and the square immediately 
  ![npm package version](https://img.shields.io/badge/npm%20package->=v8.3.0-green)
 
 ## Diagram
-
+```
 
                           ┌────────────────────────────────┐
                           │ Piece                          │
@@ -72,7 +72,7 @@ If the adjacent square contains an opponent's piece, and the square immediately 
             └─────────────────────────────┘         └─────────────────────────────┘ 
 
 
-
+```
 ## Menu
 
                                   ┌────────────────────────────────┐
