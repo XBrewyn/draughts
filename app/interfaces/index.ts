@@ -1,4 +1,4 @@
-import Board from '../Board';
+import Board from '../Board'
 
 interface MoveStrategy {
   canMove(board: Board, piecePos: string, newPos: string): boolean;
@@ -24,4 +24,4 @@ export {
   EatStrategy,
   Position,
   EatPiece
-};
+}

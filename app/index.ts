@@ -1,21 +1,21 @@
-import { Color, Option } from './Tools/enums';
-import BlackPiece from './Piece/BlackPiece';
-import Board from './Board';
-import Graph from './Graph';
-import Menu from './Menu';
-import Piece from './Piece';
-import Status from './Status';
-import Tool from './Tools';
-import WhitePiece from './Piece/WhitePiece';
+import { Color, Option } from './Tools/enums'
+import BlackPiece from './Piece/BlackPiece'
+import Board from './Board'
+import Graph from './Graph'
+import Menu from './Menu'
+import Piece from './Piece'
+import Status from './Status'
+import Tool from './Tools'
+import WhitePiece from './Piece/WhitePiece'
 
 class Game {
-  private _board: Board;
-  private _canEat: boolean = false;
-  private _canMove: boolean = false;
-  private _colorTurn: Color = Color.WHITE;
-  private _piece: Piece | null = null;
-  private _piecePos: string;
-  private _newPos: string;
+  private _board: Board
+  private _canEat: boolean = false
+  private _canMove: boolean = false
+  private _colorTurn: Color = Color.WHITE
+  private _piece: Piece | null = null
+  private _piecePos: string
+  private _newPos: string
   private _menuOptions: any = [
     {
       name: Option.PLAY_GAME,
@@ -36,76 +36,75 @@ class Game {
     {
       name: Option.EXIT,
       display: (exit: () => {}) => {
-        Graph.gameOver();
-        exit();
+        Graph.gameOver()
+        exit()
       }
-    },
-  ];
+    }
+  ]
 
-  constructor() {
-    this._board = this.buildBoard();
+  constructor () {
+    this._board = this.buildBoard()
 
-    Menu.display(this._menuOptions);
+    Menu.display(this._menuOptions)
   }
 
-  private buildBoard(): Board {
-    const board: Board = new Board(); 
+  private buildBoard (): Board {
+    const board: Board = new Board()
 
     board.addPiece({
-      white: WhitePiece,
-      black: BlackPiece
-    });
+      WhitePiece,
+      BlackPiece
+    })
 
-    return board;
+    return board
   }
 
-  private start(): void {
-    this.displayGame();
+  private start (): void {
+    this.displayGame()
 
     Tool.input('\t[piecePos, newPos]: ', (positions: string) => {
-      const [piecePos, newPos]: string[] = positions.split(' to ');
+      const [piecePos, newPos]: string[] = positions.split(' to ')
 
-      this._piece = this._board.searchPiece(piecePos);
-      this._piecePos = piecePos;
-      this._newPos = newPos;
+      this._piece = this._board.searchPiece(piecePos)
+      this._piecePos = piecePos
+      this._newPos = newPos
 
       if (this.checkTurn()) {
-        this.movePiece();
+        this.movePiece()
       }
 
-      this.displayGame();
-    });
+      this.displayGame()
+    })
   }
 
-  private displayGame(): void {
-    this._board.display();
-    Status.display(this);
+  private displayGame (): void {
+    this._board.display()
+    Status.display(this)
   }
 
-  private checkTurn(): boolean {
-    const defaultColor = { color: '' };
-    const piece: Piece | typeof defaultColor = (this._piece || defaultColor);
+  private checkTurn (): boolean {
+    const defaultColor = { color: '' }
+    const piece: Piece | typeof defaultColor = (this._piece || defaultColor)
 
-    return (piece.color === this._colorTurn) ? true : false;
+    return (piece.color === this._colorTurn)
   }
 
-  private movePiece(): void {
-    this._canMove = this._piece.canMove(this._board, this._newPos);
-    this._canEat = this._piece.canEat(this._board, this._newPos);
+  private movePiece (): void {
+    this._canMove = this._piece.canMove(this._board, this._newPos)
+    this._canEat = this._piece.canEat(this._board, this._newPos)
 
     if (this._canMove) {
-      this._board.update(this._piece, this._newPos);
-      this.changeTurn();
-
+      this._board.update(this._piece, this._newPos)
+      this.changeTurn()
     } else if (this._canEat) {
-      this._board.remove(this._piece.enemyPos);
-      this._board.update(this._piece, this._newPos);
+      this._board.remove(this._piece.enemyPos)
+      this._board.update(this._piece, this._newPos)
     }
   }
 
-  private changeTurn(): void {
-    this._colorTurn = (this._colorTurn === Color.BLACK) ? Color.WHITE : Color.BLACK;
+  private changeTurn (): void {
+    this._colorTurn = (this._colorTurn === Color.BLACK) ? Color.WHITE : Color.BLACK
   }
 }
 
-new Game();
+new Game()
