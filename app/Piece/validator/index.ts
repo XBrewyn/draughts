@@ -29,7 +29,7 @@ const getEnemyPos = (
 ): string => {
   const piecePosn: Position = Tool.formatPosition(piecePos);
   const newPosn: Position = Tool.formatPosition(newPos);
-  const step = (color === Color.WHITE) ? -1 : 1;
+  const step: number = (color === Color.WHITE) ? -1 : 1;
   const row: number = (newPosn.row - step);
   const column: number = (
     (piecePosn.column < newPosn.column)
