@@ -48,7 +48,7 @@ class Graph {
     console.log(`\n\n${render}\n\n`);
   }
 
-  static menu(select: number, options: any[]) {
+  static menu(select: number, options: any[]): void {
     let render: string = '';
   
     options.forEach(({ name }: any = {}, index: number) => {
@@ -89,7 +89,7 @@ class Graph {
     `;
   }
 
-  static notAvailable() {
+  static notAvailable(): void {
     Tool.cleanScreen();
     console.log(`${Graph.control()}
         Feature
@@ -102,7 +102,7 @@ class Graph {
     `);
   }
 
-  static author() {
+  static author(): void {
     Tool.cleanScreen();
     console.log(`${Graph.control()}
 
@@ -115,7 +115,7 @@ class Graph {
     `);
   }
 
-  static gameOver() {
+  static gameOver(): void {
     Tool.cleanScreen();
     console.log(`${Graph.control()}
 

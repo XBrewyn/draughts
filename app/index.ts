@@ -9,13 +9,13 @@ import Tool from './Tools';
 import WhitePiece from './Piece/WhitePiece';
 
 class Game {
-  private _board: Board = this.buildBoard();
+  private _board: Board;
   private _canEat: boolean = false;
   private _canMove: boolean = false;
   private _colorTurn: Color = Color.WHITE;
   private _piece: Piece | null = null;
-  private _selectPiecePos: string;
-  private _selectPosition: string;
+  private _piecePos: string;
+  private _newPos: string;
   private _menuOptions: any = [
     {
       name: Option.PLAY_GAME,
@@ -43,33 +43,35 @@ class Game {
   ];
 
   constructor() {
-    const menu = new Menu(this._menuOptions);
+    this._board = this.buildBoard();
 
-    menu.display();
+    Menu.display(this._menuOptions);
   }
 
   private buildBoard(): Board {
-    const boardInstance = Board.getInstance(); 
+    const board: Board = new Board(); 
 
-    boardInstance.addPiece({
+    board.addPiece({
       white: WhitePiece,
       black: BlackPiece
     });
 
-    return boardInstance;
+    return board;
   }
 
   private start(): void {
     this.displayGame();
 
     Tool.input('\t[piecePos, newPos]: ', (positions: string) => {
-      const [piecePos, newPos]: any = positions.split(' to ');
+      const [piecePos, newPos]: string[] = positions.split(' to ');
 
       this._piece = this._board.searchPiece(piecePos);
-      this._selectPiecePos = piecePos;
-      this._selectPosition = newPos;
+      this._piecePos = piecePos;
+      this._newPos = newPos;
 
-      if (this.checkTurn()) this.movePiece();
+      if (this.checkTurn()) {
+        this.movePiece();
+      }
 
       this.displayGame();
     });
@@ -81,22 +83,23 @@ class Game {
   }
 
   private checkTurn(): boolean {
-    const { color = '' }: any = this._piece || {};
+    const defaultColor = { color: '' };
+    const piece: Piece | typeof defaultColor = (this._piece || defaultColor);
 
-    return (color === this._colorTurn) ? true : false;
+    return (piece.color === this._colorTurn) ? true : false;
   }
 
   private movePiece(): void {
-    this._canMove = this._piece.canMove(this._board, this._selectPosition);
-    this._canEat = this._piece.canEat(this._board, this._selectPosition);
+    this._canMove = this._piece.canMove(this._board, this._newPos);
+    this._canEat = this._piece.canEat(this._board, this._newPos);
 
     if (this._canMove) {
-      this._board.update(this._piece, this._selectPosition);
+      this._board.update(this._piece, this._newPos);
       this.changeTurn();
 
     } else if (this._canEat) {
       this._board.remove(this._piece.enemyPos);
-      this._board.update(this._piece, this._selectPosition);
+      this._board.update(this._piece, this._newPos);
     }
   }
 

@@ -10,12 +10,12 @@ class Tool {
   private constructor() {}
 
   static formatPosition(position: string, num: number = 0): any {
-    const [column, row]: any = position;
+    const [column, row]: string = position;
 
     return { 
       column: (parseInt(ColumnPosition[column]) - num),
       row: (parseInt(row) - num)
-    }
+    };
   }
 
   static space(number: number): string {
@@ -42,7 +42,7 @@ class Tool {
         callback(res);
         recursiveAsyncReadLine();
       })
-    })())
+    })());
   }
 }
 

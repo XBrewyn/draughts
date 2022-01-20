@@ -6,56 +6,56 @@ import { Color, ColumnPosition } from '../../Tools/enums';
 
 const canMove = (
   board: Board,
-  currentPosition: string,
-  selectPosition: string,
+  piecePos: string,
+  newPos: string,
   step: number
 ) => {
-  const piecePos: Position = Tool.formatPosition(currentPosition);
-  const selectPos: Position = Tool.formatPosition(selectPosition);
-  const isEmptySelectPosition: boolean = board.searchPiece(selectPosition) === null;
-  const isValidRow: boolean = ((piecePos.row + step) === selectPos.row);
-  const isValidColumn: boolean = (
-    (piecePos.column + step) === selectPos.column ||
-    (piecePos.column - step) === selectPos.column
+  const piecePosn: Position = Tool.formatPosition(piecePos);
+  const newPosn: Position = Tool.formatPosition(newPos);
+  const isEmpty: boolean = board.searchPiece(newPos) === null;
+  const isRow: boolean = ((piecePosn.row + step) === newPosn.row);
+  const isColumn: boolean = (
+    (piecePosn.column + step) === newPosn.column ||
+    (piecePosn.column - step) === newPosn.column
   );
 
-  return (isValidColumn && isValidRow) && isEmptySelectPosition;
+  return (isRow && isColumn) && isEmpty;
 }
 
 const getEnemyPos = (
-  currentPosition: string, 
-  selectPosition: string,
+  piecePos: string, 
+  newPos: string,
   color: Color
 ): string => {
-  const piecePos: Position = Tool.formatPosition(currentPosition);
-  const selectPos: Position = Tool.formatPosition(selectPosition);
-  const stepEat = (color === Color.WHITE) ? -1 : 1;
-  let enemyPosColumn: number = (selectPos.column + 1);
-  let enemyPosRow: number = (selectPos.row - stepEat);
+  const piecePosn: Position = Tool.formatPosition(piecePos);
+  const newPosn: Position = Tool.formatPosition(newPos);
+  const step = (color === Color.WHITE) ? -1 : 1;
+  const row: number = (newPosn.row - step);
+  const column: number = (
+    (piecePosn.column < newPosn.column)
+      ? (newPosn.column - 1)
+      : (newPosn.column + 1)
+  );
 
-  if (piecePos.column < selectPos.column) {
-    enemyPosColumn = (selectPos.column - 1);
-  }
-
-  return `${ColumnPosition[enemyPosColumn]}${enemyPosRow}`;
+  return `${ColumnPosition[column]}${row}`;
 }
 
 const eatPiece = (
   board: Board,
-  currentPosition: string,
-  selectPosition: string,
+  piecePos: string,
+  newPos: string,
   color: Color,
   stepMove: number,
 ): any => {
-  const enemyPos: string = getEnemyPos(currentPosition, selectPosition, color);
-  const enemyPiece: Piece = Object.assign({}, board.searchPiece(enemyPos));
-  const canMov: boolean = canMove(board, currentPosition, selectPosition, stepMove);
-  const canEat: boolean = (enemyPiece.color !== color) ? true : false;
+  const targetPos: string = getEnemyPos(piecePos, newPos, color);
+  const target: Piece = Object.assign({}, board.searchPiece(targetPos));
+  const canMov: boolean = canMove(board, piecePos, newPos, stepMove);
+  const canEat: boolean = (target.color !== color) ? true : false;
 
   return {
     canEat: (canMov && canEat),
-    enemyPos
-  }
+    targetPos
+  };
 }
 
 export {

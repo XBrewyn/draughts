@@ -6,7 +6,7 @@ import { MoveKingPiece } from './Move';
 
 abstract class Piece {
   private _color: Color;
-  private _currentPosition: string;
+  private _position: string;
   private _isKing: boolean = false;
   private _icon : string;
   protected _typeMove: MoveStrategy;
@@ -15,7 +15,7 @@ abstract class Piece {
   constructor(color: Color, position: string) {
     this._color = color;
     this._icon = Icon[color];
-    this._currentPosition = position;
+    this._position = position;
   }
 
   public get color(): Color {
@@ -27,7 +27,7 @@ abstract class Piece {
   }
 
   public get position(): string {
-    return this._currentPosition;
+    return this._position;
   }
 
   public get isKing(): boolean {
@@ -39,15 +39,15 @@ abstract class Piece {
   }
 
   public set position(value: string) {
-    this._currentPosition = value;
+    this._position = value;
   }
 
-  public canMove(board: Board, selectPosition: string): boolean {
-    return this._typeMove.canMove(board, this._currentPosition, selectPosition);
+  public canMove(board: Board, newPos: string): boolean {
+    return this._typeMove.canMove(board, this._position, newPos);
   }
 
-  public canEat(board: Board, selectPosition: string): boolean {
-    return this._typeEat.canEat(board, this._currentPosition, selectPosition);
+  public canEat(board: Board, newPos: string): boolean {
+    return this._typeEat.canEat(board, this._position, newPos);
   }
 
   public get enemyPos(): string {

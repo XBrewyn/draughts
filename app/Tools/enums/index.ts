@@ -1,7 +1,7 @@
 enum Color { 
   BLACK = 'BLACK', 
   WHITE = 'WHITE'
-}
+};
 
 enum ColumnPosition { 
   a = 1, 
@@ -14,12 +14,12 @@ enum ColumnPosition {
   h, 
   i, 
   j
-}
+};
 
 enum Icon {
   BLACK = '⚫', 
   WHITE = '⚪'
-}
+};
 
 enum Option {
   PLAY_GAME = 'PLAY GAME',
@@ -27,11 +27,11 @@ enum Option {
   VS_CPU = 'VS CPU',
   AUTHOR = 'AUTHOR',
   EXIT = 'EXIT'
-}
+};
 
 export {
   Color,
   ColumnPosition,
   Icon,
   Option
-}
+};

@@ -5,17 +5,10 @@ import { ColumnPosition } from '../Tools/enums';
 import { Position } from '../interfaces';
 
 class Board {
-  private _board: any[];
-  private static _instance: Board;
+  private _board: any[][];
  
-  private constructor() {
+  constructor() {
     this._board = this.buildBoard();
-  }
-
-  public static getInstance() {
-    if (!Board._instance) Board._instance = new Board();
-
-    return Board._instance;
   }
 
   private buildBoard(): number[][] {
@@ -24,7 +17,7 @@ class Board {
     return arrays.map(() => arrays);
   }
 
-  public get(): any[] {
+  public get(): any[][] {
     return this._board;
   }
 
@@ -32,18 +25,12 @@ class Board {
     return (row % 2) === ((column % 2 === 1) ? 0 : 1) ? true : false;
   }
 
-  public remove(position: string): Piece {
-    let piece: Piece | null = null;
-
+  public remove(position: string): void {
     if (this.isPosition(position)) {
       const { row, column }: Position = Tool.formatPosition(position, 1);
 
-      piece = this._board[row][column];
-
       this._board[row][column] = null;
     }
-
-    return piece;
   }
 
   public update(piece: Piece, selectPosition: string): void {
@@ -74,15 +61,15 @@ class Board {
   }
 
   public display() {
-    Graph.board(Board._instance);
+    Graph.board(this);
   }
 
   public addPiece({ white, black }: any = {}): void {
     this._board = this._board.map((rows: any[], indexRow: number) =>
       rows.map((__, indexColumn: number) => {
-        let piece: Piece | null = null;
         const isSquareBlack: boolean = this.isSquareBlack(indexRow, indexColumn);
         const position: string = ColumnPosition[indexColumn + 1] + (indexRow + 1);
+        let piece: Piece | null = null;
 
         if (isSquareBlack && indexRow <= 3) {
           piece = new white(position);  

@@ -2,48 +2,38 @@ import Graph from '../Graph';
 import Tool from '../Tools';
 
 class Menu {
-  private _index: number = 0;
-  private _lenOption: number = 0;
-  private _options: any[] = [];
-  private _showMenu = true;
+  public static display(options: any[]) {
+    const lenOption: number = (options.length - 1);
+    let index: number = 0;
+    let showMenu = true;
 
-  constructor(options: any[]) {
-    this._lenOption = (options.length - 1);
-    this._options = options;
-  }
+    Graph.menu(index, options);
 
-  private graphMenu() {
-    Graph.menu(this._index, this._options); 
-  }
-
-  public display() {
-    this.graphMenu();
-
-    Tool.keyPress((key: string, exit: any) => {
+    Tool.keyPress((key: string, exit: () => void) => {
       switch(key) {
         case 'right':
-          this._index = (this._index >= this._lenOption) ? 0 : this._index + 1;
+          index = (index >= lenOption) ? 0 : (index + 1);
           break;
 
         case 'left':
-          this._index = (this._index <= 0) ? this._lenOption : this._index - 1;
+          index = (index <= 0) ? lenOption : (index - 1);
           break;
 
         case 'return':
-          if (this._showMenu) {
-            this._options[this._index].display(exit);
+          if (showMenu) {
+            options[index].display(exit);
           }
 
-          this._showMenu = false;
+          showMenu = false;
           break;
 
         case 'escape':
-          this._showMenu = true;
+          showMenu = true;
           break
       }
 
-      if (this._showMenu) {
-        this.graphMenu();
+      if (showMenu) {
+        Graph.menu(index, options);
       }
     });
   }

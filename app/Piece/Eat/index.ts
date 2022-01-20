@@ -5,25 +5,25 @@ import { eatPiece } from '../validator';
 
 const STEP_MOVE = 2;
 
-class EatWhitePiece implements EatStrategy {
-  enemyPos: any;
+class EatBlackPiece implements EatStrategy {
+  enemyPos: string;
 
-  public canEat(board: Board, currentPosition: string, selectPosition: string) {
-    const { canEat, enemyPos }: EatPiece = eatPiece(board, currentPosition, selectPosition, Color.BLACK, STEP_MOVE);
+  public canEat(board: Board, piecePos: string, newPos: string) {
+    const { canEat, targetPos }: EatPiece = eatPiece(board, piecePos, newPos, Color.BLACK, STEP_MOVE);
 
-    this.enemyPos = enemyPos;
+    this.enemyPos = targetPos;
 
     return canEat;
   }
 }
 
-class EatBlackPiece implements EatStrategy {
-  enemyPos: any;
+class EatWhitePiece implements EatStrategy {
+  enemyPos: string;
 
-  public canEat(board: Board, currentPosition: string, selectPosition: string) {
-    const { canEat, enemyPos } = eatPiece(board, currentPosition, selectPosition, Color.WHITE, -STEP_MOVE);
+  public canEat(board: Board, piecePos: string, newPos: string) {
+    const { canEat, targetPos }: EatPiece = eatPiece(board, piecePos, newPos, Color.WHITE, -STEP_MOVE);
 
-    this.enemyPos = enemyPos;
+    this.enemyPos = targetPos;
 
     return canEat;
   }
@@ -32,7 +32,7 @@ class EatBlackPiece implements EatStrategy {
 class EatKingPiece implements EatStrategy {
   enemyPos: string;
 
-  public canEat(board: Board, currentPosition: string, selectPosition: string): boolean {
+  public canEat(board: Board, piecePos: string, newPos: string): boolean {
     return false;
   }
 }
