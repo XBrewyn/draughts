@@ -100,6 +100,12 @@ If the adjacent square contains an opponent's piece, and the square immediately 
        ├── interfaces
        ├── Menu
        ├── Piece
-       └── Tools
+       |    ├── Move
+       |    ├── Eat
+       |    └── Validator
+       |
+       ├── Tools
+       |    └── enums
+       |
        └── index.js
    ```
