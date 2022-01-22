@@ -98,7 +98,7 @@ class Game {
       this._board.update(this._piece, this._newPos)
       this.changeTurn()
     } else if (this._canEat) {
-      this._board.remove(this._piece.enemyPos)
+      this._board.remove(this._piece.targetPos)
       this._board.update(this._piece, this._newPos)
     }
   }

@@ -1,7 +1,7 @@
 import { Icon } from '../Tools/enums'
 
 class Status {
-  public static display (state: any) {
+  public static display (state: any): void {
     let status: string = 'Invalid move ❌'
 
     if (!state._board.isPosition(state._piecePos, state._newPos)) {

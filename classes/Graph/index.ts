@@ -19,7 +19,7 @@ const SPACE: {
 }
 
 class Graph {
-  static board (boardInstance: Board) {
+  static board (boardInstance: Board): void {
     const board: any[][] = boardInstance.get()
     const len: number = board.length
     const repeat: (str: string) => string = (str: string) => str.repeat(len - 1)

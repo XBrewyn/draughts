@@ -3,7 +3,7 @@ import Tool from '../Tools'
 import { typeMenuOption } from '../Tools/types'
 
 class Menu {
-  public static display (options: typeMenuOption) {
+  public static display (options: typeMenuOption): void {
     const lenOption: number = (options.length - 1)
     let index: number = 0
     let showMenu: boolean = true

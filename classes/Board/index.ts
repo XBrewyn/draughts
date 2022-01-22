@@ -54,7 +54,7 @@ class Board {
       /(^[a-j]{1})+([1-9]{1}|10)$/.test(position))
   }
 
-  public display () {
+  public display (): void {
     Graph.board(this)
   }
 

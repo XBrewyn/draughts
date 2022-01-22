@@ -50,11 +50,11 @@ abstract class Piece {
     return this._typeEat.canEat(board, this._position, newPos)
   }
 
-  public get enemyPos (): string {
-    return this._typeEat.enemyPos
+  public get targetPos (): string {
+    return this._typeEat.target
   }
 
-  public changePieceBehavior (typeMove: MoveKingPiece, typeEat: EatKingPiece) {
+  public changePieceBehavior (typeMove: MoveKingPiece, typeEat: EatKingPiece): void {
     this._typeMove = typeMove
     this._typeEat = typeEat
   }

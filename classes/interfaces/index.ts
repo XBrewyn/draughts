@@ -5,7 +5,8 @@ interface MoveStrategy {
 };
 
 interface EatStrategy {
-  enemyPos: string;
+  target: string;
+
   canEat(board: Board, piecePos: string, newPos: string): boolean;
 };
 
