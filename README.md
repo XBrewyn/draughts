@@ -166,7 +166,8 @@ If the adjacent square contains an opponent's piece, and the square immediately 
        │    └── Validator
        │
        ├── Tools
-       │    └── enums
+       │    ├── enums
+       │    └── types
        │
        └── index.js
    ```
