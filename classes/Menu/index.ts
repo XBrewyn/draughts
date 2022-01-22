@@ -1,9 +1,9 @@
 import Graph from '../Graph'
 import Tool from '../Tools'
-import { menuOptions } from '../Tools/types'
+import { typeMenuOption } from '../Tools/types'
 
 class Menu {
-  public static display (options: menuOptions) {
+  public static display (options: typeMenuOption) {
     const lenOption: number = (options.length - 1)
     let index: number = 0
     let showMenu: boolean = true

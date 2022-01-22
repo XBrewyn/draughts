@@ -1,6 +1,6 @@
 import * as readline from 'readline'
 import { ColumnPosition } from './enums'
-import { formatPosition } from './types'
+import { typeFormatPosition } from './types'
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -8,7 +8,7 @@ const rl = readline.createInterface({
 })
 
 class Tool {
-  static formatPosition (position: string, num: number = 0): formatPosition {
+  static formatPosition (position: string, num: number = 0): typeFormatPosition {
     const [column, row]: string = position
 
     return {

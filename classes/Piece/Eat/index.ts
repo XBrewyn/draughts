@@ -1,6 +1,7 @@
 import Board from '../../Board'
-import { EatPiece, EatStrategy } from '../../interfaces'
+import { EatStrategy } from '../../interfaces'
 import { Color } from '../../Tools/enums'
+import { typeEat } from '../../Tools/types'
 import { eatPiece } from '../validator'
 
 const STEP_MOVE = 2
@@ -9,7 +10,7 @@ class EatBlackPiece implements EatStrategy {
   enemyPos: string
 
   public canEat (board: Board, piecePos: string, newPos: string) {
-    const { canEat, targetPos }: EatPiece = eatPiece(board, piecePos, newPos, Color.BLACK, STEP_MOVE)
+    const { canEat, targetPos }: typeEat = eatPiece(board, piecePos, newPos, Color.BLACK, STEP_MOVE)
 
     this.enemyPos = targetPos
 
@@ -21,7 +22,7 @@ class EatWhitePiece implements EatStrategy {
   enemyPos: string
 
   public canEat (board: Board, piecePos: string, newPos: string) {
-    const { canEat, targetPos }: EatPiece = eatPiece(board, piecePos, newPos, Color.WHITE, -STEP_MOVE)
+    const { canEat, targetPos }: typeEat = eatPiece(board, piecePos, newPos, Color.WHITE, -STEP_MOVE)
 
     this.enemyPos = targetPos
 

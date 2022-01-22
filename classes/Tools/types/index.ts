@@ -1,13 +1,9 @@
-type defaultColor = {
-  color: ''
-}
-
-type formatPosition = {
+type typeFormatPosition = {
   column: number,
   row: number
 }
 
-type menuOptions = [
+type typeMenuOption = [
   {
     name: string,
     display: () => void
@@ -30,8 +26,13 @@ type menuOptions = [
   }
 ]
 
+type typeEat = {
+  canEat: boolean;
+  targetPos: string;
+};
+
 export {
-  defaultColor,
-  formatPosition,
-  menuOptions
+  typeFormatPosition,
+  typeMenuOption,
+  typeEat
 }

@@ -1,5 +1,5 @@
 import { ColumnPosition } from '../Tools/enums'
-import { formatPosition } from '../Tools/types'
+import { typeFormatPosition } from '../Tools/types'
 import Graph from '../Graph'
 import Piece from '../Piece'
 import Tool from '../Tools'
@@ -26,14 +26,14 @@ class Board {
   }
 
   public remove (position: string): void {
-    const { row, column }: formatPosition = Tool.formatPosition(position, 1)
+    const { row, column }: typeFormatPosition = Tool.formatPosition(position, 1)
 
     this._board[row][column] = null
   }
 
   public update (piece: Piece, selectPosition: string): void {
-    const piecePos: formatPosition = Tool.formatPosition(piece.position, 1)
-    const selectPos: formatPosition = Tool.formatPosition(selectPosition, 1)
+    const piecePos: typeFormatPosition = Tool.formatPosition(piece.position, 1)
+    const selectPos: typeFormatPosition = Tool.formatPosition(selectPosition, 1)
 
     this._board[piecePos.row][piecePos.column] = null
     this._board[selectPos.row][selectPos.column] = piece
@@ -42,7 +42,7 @@ class Board {
   }
 
   public searchPiece (searchPosition: string): Piece | null {
-    const { row, column }: formatPosition = Tool.formatPosition(searchPosition, 1)
+    const { row, column }: typeFormatPosition = Tool.formatPosition(searchPosition, 1)
 
     return this.isPosition(searchPosition)
       ? this._board[row][column]

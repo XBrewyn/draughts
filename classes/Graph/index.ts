@@ -1,5 +1,5 @@
 import { ColumnPosition } from '../Tools/enums'
-import { menuOptions } from '../Tools/types'
+import { typeMenuOption } from '../Tools/types'
 import Board from '../Board'
 import Piece from '../Piece'
 import Tool from '../Tools'
@@ -55,7 +55,7 @@ class Graph {
     console.log(`\n\n${render}\n\n`)
   }
 
-  static menu (select: number, options: menuOptions): void {
+  static menu (select: number, options: typeMenuOption): void {
     let render: string = ''
 
     options.forEach(({ name }: any, index: number) => {

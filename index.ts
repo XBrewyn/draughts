@@ -1,5 +1,5 @@
 import { Color, Option } from './classes/Tools/enums'
-import { defaultColor, menuOptions } from './classes/Tools/types'
+import { typeMenuOption } from './classes/Tools/types'
 import BlackPiece from './classes/Piece/BlackPiece'
 import Board from './classes/Board'
 import Graph from './classes/Graph'
@@ -17,7 +17,7 @@ class Game {
   private _piece: Piece | null = null
   private _piecePos: string
   private _newPos: string
-  private _menuOptions: menuOptions = [
+  private _menuOption: typeMenuOption = [
     {
       name: Option.PLAY_GAME,
       display: () => this.start()
@@ -46,7 +46,7 @@ class Game {
   constructor () {
     this._board = this.buildBoard()
 
-    Menu.display(this._menuOptions)
+    Menu.display(this._menuOption)
   }
 
   private buildBoard (): Board {
@@ -84,7 +84,8 @@ class Game {
   }
 
   private checkTurn (): boolean {
-    const piece: Piece | defaultColor = (this._piece || { color: '' })
+    const defaultColor = { color: '' }
+    const piece: Piece | typeof defaultColor = (this._piece || defaultColor)
 
     return (piece.color === this._colorTurn)
   }

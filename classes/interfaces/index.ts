@@ -9,13 +9,7 @@ interface EatStrategy {
   canEat(board: Board, piecePos: string, newPos: string): boolean;
 };
 
-interface EatPiece {
-  canEat: boolean;
-  targetPos: string;
-};
-
 export {
   MoveStrategy,
-  EatStrategy,
-  EatPiece
+  EatStrategy
 }

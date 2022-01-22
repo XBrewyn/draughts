@@ -2,16 +2,16 @@ import Piece from '..'
 import Board from '../../Board'
 import Tool from '../../Tools'
 import { Color, ColumnPosition } from '../../Tools/enums'
-import { formatPosition } from '../../Tools/types'
+import { typeFormatPosition, typeEat } from '../../Tools/types'
 
 const canMove = (
   board: Board,
   piecePos: string,
   newPos: string,
   move: number
-) => {
-  const piecePosn: formatPosition = Tool.formatPosition(piecePos)
-  const newPosn: formatPosition = Tool.formatPosition(newPos)
+): boolean => {
+  const piecePosn: typeFormatPosition = Tool.formatPosition(piecePos)
+  const newPosn: typeFormatPosition = Tool.formatPosition(newPos)
   const isEmpty: boolean = board.searchPiece(newPos) === null
   const isRow: boolean = ((piecePosn.row + move) === newPosn.row)
   const isColumn: boolean = (
@@ -27,8 +27,8 @@ const getEnemyPos = (
   newPos: string,
   color: Color
 ): string => {
-  const piecePosn: formatPosition = Tool.formatPosition(piecePos)
-  const newPosn: formatPosition = Tool.formatPosition(newPos)
+  const piecePosn: typeFormatPosition = Tool.formatPosition(piecePos)
+  const newPosn: typeFormatPosition = Tool.formatPosition(newPos)
   const move: number = (color === Color.WHITE) ? -1 : 1
   const row: number = (newPosn.row - move)
   const column: number = (
@@ -46,7 +46,7 @@ const eatPiece = (
   newPos: string,
   color: Color,
   move: number
-): any => {
+): typeEat => {
   const targetPos: string = getEnemyPos(piecePos, newPos, color)
   const target: Piece = Object.assign({}, board.searchPiece(targetPos))
   const canMov: boolean = canMove(board, piecePos, newPos, move)
