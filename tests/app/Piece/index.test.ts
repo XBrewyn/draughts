@@ -1,5 +1,5 @@
-import Piece from '../../../classes/Piece'
-import { Color } from '../../../classes/Tools/enums'
+import Piece from '../../../app/Piece'
+import { Color } from '../../../app/Tools/enums'
 
 class TestPiece extends Piece {}
 
