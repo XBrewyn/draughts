@@ -18,7 +18,7 @@ type typeMenuOption = [
   },
   {
     name: string,
-    display: () =>void
+    display: () => void
   },
   {
     name: string,
