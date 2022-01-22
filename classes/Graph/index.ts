@@ -1,9 +1,16 @@
+import { ColumnPosition } from '../Tools/enums'
+import { menuOptions } from '../Tools/types'
+import Board from '../Board'
 import Piece from '../Piece'
 import Tool from '../Tools'
-import Board from '../Board'
-import { ColumnPosition } from '../Tools/enums'
 
-const SPACE = {
+const SPACE: {
+  TWO: string,
+  FOUR: string,
+  FIVE: string,
+  SEVEN: string,
+  TEN: string
+} = {
   TWO: Tool.space(2),
   FOUR: Tool.space(4),
   FIVE: Tool.space(5),
@@ -13,14 +20,14 @@ const SPACE = {
 
 class Graph {
   static board (boardInstance: Board) {
-    const board = boardInstance.get()
-    const LENGTH = board.length
-    const repeat = (str: string) => str.repeat(LENGTH - 1)
-    const ABC = 'ABCDEFGHIJ'.replace(/\w/g, (letter) => letter + SPACE.FIVE)
-    const lines = `├${repeat('─────┼')}─────┤\n`
-    let render: string = `${SPACE.TEN}${ABC}\n${SPACE.SEVEN}┌${repeat('─────┬')}─────┐\n`
+    const board: any[][] = boardInstance.get()
+    const len: number = board.length
+    const repeat: (str: string) => string = (str: string) => str.repeat(len - 1)
+    const column: string = 'ABCDEFGHIJ'.replace(/\w/g, (letter) => letter + SPACE.FIVE)
+    const lines: string = `├${repeat('─────┼')}─────┤\n`
+    let render: string = `${SPACE.TEN}${column}\n${SPACE.SEVEN}┌${repeat('─────┬')}─────┐\n`
 
-    for (let row: number = (LENGTH - 1); row >= 0; row--) {
+    for (let row: number = (len - 1); row >= 0; row--) {
       const numberRow: number = (row + 1)
 
       board[row].forEach((piece: Piece | null, index: number) => {
@@ -42,16 +49,16 @@ class Graph {
         : `│ ${numberRow}\n`
     }
 
-    render += `${SPACE.SEVEN}└${repeat('─────┴')}─────┘\n${SPACE.TEN + ABC}`
+    render += `${SPACE.SEVEN}└${repeat('─────┴')}─────┘\n${SPACE.TEN + column}`
 
     Tool.cleanScreen()
     console.log(`\n\n${render}\n\n`)
   }
 
-  static menu (select: number, options: any[]): void {
+  static menu (select: number, options: menuOptions): void {
     let render: string = ''
 
-    options.forEach(({ name }: any = {}, index: number) => {
+    options.forEach(({ name }: any, index: number) => {
       const selecter: string = (select === index) ? '►' : ''
       const newLine: string = (index !== (options.length - 1)) ? '\n' : ''
       const column: string = selecter ? '│ │' : ' │ │'

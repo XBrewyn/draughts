@@ -1,11 +1,12 @@
 import Graph from '../Graph'
 import Tool from '../Tools'
+import { menuOptions } from '../Tools/types'
 
 class Menu {
-  public static display (options: any[]) {
+  public static display (options: menuOptions) {
     const lenOption: number = (options.length - 1)
     let index: number = 0
-    let showMenu = true
+    let showMenu: boolean = true
 
     Graph.menu(index, options)
 

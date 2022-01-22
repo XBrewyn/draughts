@@ -1,12 +1,13 @@
-import { Color, Option } from './Tools/enums'
-import BlackPiece from './Piece/BlackPiece'
-import Board from './Board'
-import Graph from './Graph'
-import Menu from './Menu'
-import Piece from './Piece'
-import Status from './Status'
-import Tool from './Tools'
-import WhitePiece from './Piece/WhitePiece'
+import { Color, Option } from './classes/Tools/enums'
+import { defaultColor, menuOptions } from './classes/Tools/types'
+import BlackPiece from './classes/Piece/BlackPiece'
+import Board from './classes/Board'
+import Graph from './classes/Graph'
+import Menu from './classes/Menu'
+import Piece from './classes/Piece'
+import Status from './classes/Status'
+import Tool from './classes/Tools'
+import WhitePiece from './classes/Piece/WhitePiece'
 
 class Game {
   private _board: Board
@@ -16,7 +17,7 @@ class Game {
   private _piece: Piece | null = null
   private _piecePos: string
   private _newPos: string
-  private _menuOptions: any = [
+  private _menuOptions: menuOptions = [
     {
       name: Option.PLAY_GAME,
       display: () => this.start()
@@ -83,8 +84,7 @@ class Game {
   }
 
   private checkTurn (): boolean {
-    const defaultColor = { color: '' }
-    const piece: Piece | typeof defaultColor = (this._piece || defaultColor)
+    const piece: Piece | defaultColor = (this._piece || { color: '' })
 
     return (piece.color === this._colorTurn)
   }
@@ -107,4 +107,4 @@ class Game {
   }
 }
 
-new Game()
+(() => new Game())()

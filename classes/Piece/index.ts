@@ -1,8 +1,8 @@
-import Board from '../Board'
-import { EatStrategy, MoveStrategy } from '../interfaces'
 import { Color, Icon } from '../Tools/enums'
 import { EatKingPiece } from './Eat'
+import { EatStrategy, MoveStrategy } from '../interfaces'
 import { MoveKingPiece } from './Move'
+import Board from '../Board'
 
 abstract class Piece {
   private _color: Color

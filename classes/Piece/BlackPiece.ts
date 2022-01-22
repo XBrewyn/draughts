@@ -1,7 +1,7 @@
-import Piece from '.'
 import { Color } from '../Tools/enums'
-import { MoveBlackPiece } from './Move'
 import { EatWhitePiece } from './Eat'
+import { MoveBlackPiece } from './Move'
+import Piece from '.'
 
 class BlackToken extends Piece {
   constructor (position: string) {

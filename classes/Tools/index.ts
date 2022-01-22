@@ -1,5 +1,6 @@
 import * as readline from 'readline'
 import { ColumnPosition } from './enums'
+import { formatPosition } from './types'
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -7,7 +8,7 @@ const rl = readline.createInterface({
 })
 
 class Tool {
-  static formatPosition (position: string, num: number = 0): any {
+  static formatPosition (position: string, num: number = 0): formatPosition {
     const [column, row]: string = position
 
     return {
@@ -31,7 +32,7 @@ class Tool {
   static keyPress (callback: (key: string, exit: () => void) => void): void {
     readline.emitKeypressEvents(process.stdin)
     process.stdin.setRawMode(true)
-    process.stdin.on('keypress', (_, key) => callback(key.name, process.exit))
+    process.stdin.on('keypress', (_, key: { name: string }) => callback(key.name, process.exit))
   }
 
   static input (question: string, callback: (res: string) => void): void {

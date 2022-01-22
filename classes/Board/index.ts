@@ -1,8 +1,8 @@
-import Piece from '../Piece'
-import Graph from '../Graph'
-import Tool from '../Tools'
 import { ColumnPosition } from '../Tools/enums'
-import { Position } from '../interfaces'
+import { formatPosition } from '../Tools/types'
+import Graph from '../Graph'
+import Piece from '../Piece'
+import Tool from '../Tools'
 
 class Board {
   private _board: any[][]
@@ -26,16 +26,14 @@ class Board {
   }
 
   public remove (position: string): void {
-    if (this.isPosition(position)) {
-      const { row, column }: Position = Tool.formatPosition(position, 1)
+    const { row, column }: formatPosition = Tool.formatPosition(position, 1)
 
-      this._board[row][column] = null
-    }
+    this._board[row][column] = null
   }
 
   public update (piece: Piece, selectPosition: string): void {
-    const piecePos: Position = Tool.formatPosition(piece.position, 1)
-    const selectPos: Position = Tool.formatPosition(selectPosition, 1)
+    const piecePos: formatPosition = Tool.formatPosition(piece.position, 1)
+    const selectPos: formatPosition = Tool.formatPosition(selectPosition, 1)
 
     this._board[piecePos.row][piecePos.column] = null
     this._board[selectPos.row][selectPos.column] = piece
@@ -44,15 +42,11 @@ class Board {
   }
 
   public searchPiece (searchPosition: string): Piece | null {
-    let piece: Piece | null = null
+    const { row, column }: formatPosition = Tool.formatPosition(searchPosition, 1)
 
-    if (this.isPosition(searchPosition)) {
-      const { row, column }: Position = Tool.formatPosition(searchPosition, 1)
-
-      piece = this._board[row][column]
-    }
-
-    return piece
+    return this.isPosition(searchPosition)
+      ? this._board[row][column]
+      : null
   }
 
   public isPosition (...positions: string[]): boolean {

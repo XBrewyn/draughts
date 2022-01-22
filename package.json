@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cd app && tsc --outDir dist -t es5 --downlevelIteration index.ts && node ./dist/index.js"
+    "start": "tsc --outDir dist -t es5 --downlevelIteration index.ts && node ./dist/index.js"
   },
   "keywords": [],
   "author": "",
