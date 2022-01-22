@@ -1,13 +1,13 @@
-import { Color, Option } from './classes/Tools/enums'
-import { typeMenuOption } from './classes/Tools/types'
-import BlackPiece from './classes/Piece/BlackPiece'
-import Board from './classes/Board'
-import Graph from './classes/Graph'
-import Menu from './classes/Menu'
-import Piece from './classes/Piece'
-import Status from './classes/Status'
-import Tool from './classes/Tools'
-import WhitePiece from './classes/Piece/WhitePiece'
+import { Color, Option } from './app/Tools/enums'
+import { typeMenuOption } from './app/Tools/types'
+import BlackPiece from './app/Piece/BlackPiece'
+import Board from './app/Board'
+import Graph from './app/Graph'
+import Menu from './app/Menu'
+import Piece from './app/Piece'
+import Status from './app/Status'
+import Tool from './app/Tools'
+import WhitePiece from './app/Piece/WhitePiece'
 
 class Game {
   private _board: Board
