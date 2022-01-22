@@ -25,7 +25,7 @@ If the adjacent square contains an opponent's piece, and the square immediately 
                            ├────────────────────────────────┤
                            │ _typeEat                       │
                            ├────────────────────────────────┤
-         ┌─────────────────┤ _canMove()                     │
+         ┌────────────────┤│ _canMove()                     │
          │                 ├────────────────────────────────┤
          │                 │ _canEat()                      │├────────────────────┐
          │                 ├────────────────────────────────┤                     │
@@ -50,7 +50,7 @@ If the adjacent square contains an opponent's piece, and the square immediately 
          │                                                                        │
          │                                                                        │
          └──────────────────┐                                    ┌────────────────┘
-                           ─┴─                                  ─┴─ 
+                           ─┴─                                  ─┴─
              ┌─────────────────────────────┐         ┌─────────────────────────────┐
              │ MoveStrategy Interface      │         │ EatStrategy Interface       │
              ├─────────────────────────────┤         ├─────────────────────────────┤
