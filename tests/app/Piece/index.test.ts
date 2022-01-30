@@ -47,7 +47,7 @@ describe('Piece', () => {
     expect(piece.isKing).toEqual(isKing)
   })
 
-  it('should called the method canEat()', () => {
+  it('should call the method canEat()', () => {
     const position: string = 'd7'
     const enemyPiece: BlackPiece = new BlackPiece(position)
 
@@ -57,7 +57,7 @@ describe('Piece', () => {
     expect(piece.canEat(board, position)).toEqual(true)
   })
 
-  it('should called the method canMove()', () => {
+  it('should call the method canMove()', () => {
     const canMove: boolean = piece.canMove(board, 'b5')
 
     expect(canMove).toEqual(true)

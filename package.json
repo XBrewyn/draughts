@@ -39,9 +39,8 @@
       "tests/app/Tools",
       "tests/app/Piece/Eat",
       "tests/app/Piece/Move",
-      "tests/app/Piece/validator",
-      "tests/app/Piece/WhitePiece.test.ts",
-      "tests/app/Piece/BlackPiece.test.ts"
+      "tests/app/Piece/validator"
+
     ]
   }
 }
