@@ -4,7 +4,7 @@ import BlackPiece from '../../../app/Piece/BlackPiece'
 import { EatBlackPiece } from '../../../app/Piece/Eat'
 import { MoveWhitePiece } from '../../../app/Piece/Move'
 import WhitePiece from '../../../app/Piece/WhitePiece'
-import { Color, Icon } from '../../../app/Tools/enums'
+import { Color, Icon } from '../../../Tools/enums'
 
 class TestPiece extends Piece {
   constructor (position: string) {
@@ -23,7 +23,7 @@ let board: Board
 
 describe('Piece', () => {
   beforeEach(() => {
-    board = new Board()
+    board = new Board(10)
     piece = new TestPiece(initialPosition)
 
     board.addPiece({

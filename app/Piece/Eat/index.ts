@@ -1,7 +1,7 @@
 import Board from '../../Board'
 import { EatStrategy } from '../../interfaces'
-import { Color } from '../../Tools/enums'
-import { typeEat } from '../../Tools/types'
+import { Color } from '../../../Tools/enums'
+import { typeEat } from '../../../Tools/types'
 import { eatPiece } from '../validator'
 
 const STEP_MOVE = 2

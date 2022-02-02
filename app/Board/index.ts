@@ -1,18 +1,18 @@
-import { ColumnPosition } from '../Tools/enums'
-import { typeFormatPosition } from '../Tools/types'
+import { ColumnPosition } from '../../Tools/enums'
+import { typeFormatPosition } from '../../Tools/types'
 import Graph from '../Graph'
 import Piece from '../Piece'
-import Tool from '../Tools'
+import Tool from '../../Tools'
 
 class Board {
   private _board: any[][]
 
-  constructor () {
-    this._board = this.buildBoard()
+  constructor (rangeNumber: number) {
+    this._board = this.buildBoard(rangeNumber)
   }
 
-  private buildBoard (): number[][] {
-    const arrays: number[] = Tool.range(10)
+  private buildBoard (rangeNumber: number): number[][] {
+    const arrays: number[] = Tool.range(rangeNumber)
 
     return arrays.map(() => arrays)
   }

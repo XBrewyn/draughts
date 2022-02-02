@@ -2,7 +2,7 @@
 enum Color {
   BLACK = 'BLACK',
   WHITE = 'WHITE'
-};
+}
 
 enum ColumnPosition {
   a = 1,
@@ -15,20 +15,23 @@ enum ColumnPosition {
   h,
   i,
   j
-};
+}
 
 enum Icon {
   BLACK = '⚫',
   WHITE = '⚪'
-};
+}
 
 enum Option {
-  PLAY_GAME = 'PLAY GAME',
+  PLAY_OFFLINE = 'PLAY OFFLINE',
   ONLINE = 'ONLINE',
   VS_CPU = 'VS CPU',
   AUTHOR = 'AUTHOR',
-  EXIT = 'EXIT'
-};
+  EXIT = 'EXIT',
+  CREATE_ROOM = 'CREATE ROOM',
+  BACK = 'BACK',
+  JOIN_ROOM = 'JOIN ROOM'
+}
 
 export {
   Color,

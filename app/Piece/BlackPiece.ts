@@ -1,4 +1,4 @@
-import { Color } from '../Tools/enums'
+import { Color } from '../../Tools/enums'
 import { EatWhitePiece } from './Eat'
 import { MoveBlackPiece } from './Move'
 import Piece from '.'

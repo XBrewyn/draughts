@@ -1,5 +1,5 @@
 import Piece from '.'
-import { Color } from '../Tools/enums'
+import { Color } from '../../Tools/enums'
 import { EatBlackPiece } from './Eat'
 import { MoveWhitePiece } from './Move'
 

@@ -1,8 +1,8 @@
 import Piece from '..'
 import Board from '../../Board'
-import Tool from '../../Tools'
-import { Color, ColumnPosition } from '../../Tools/enums'
-import { typeFormatPosition, typeEat } from '../../Tools/types'
+import Tool from '../../../Tools'
+import { Color, ColumnPosition } from '../../../Tools/enums'
+import { typeFormatPosition, typeEat } from '../../../Tools/types'
 
 const canMove = (
   board: Board,

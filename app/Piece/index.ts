@@ -1,4 +1,4 @@
-import { Color, Icon } from '../Tools/enums'
+import { Color, Icon } from '../../Tools/enums'
 import { EatKingPiece } from './Eat'
 import { EatStrategy, MoveStrategy } from '../interfaces'
 import { MoveKingPiece } from './Move'
